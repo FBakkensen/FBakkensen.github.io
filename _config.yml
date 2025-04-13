@@ -1,0 +1,23 @@
+title: BC Nerd
+author: Flemming Bakkensen
+email: flemming.bakkensen@gmail.com # Optional
+description: >- # Supports multi-line descriptions
+  All things BC but most about development in AL.
+baseurl: "" # Keep empty for user pages (your-username.github.io)
+url: "https://fbakkensen.github.io" # Your site's full URL
+github_username: FBakkensen
+
+# Build settings
+theme: minima # Default theme, change if you use another
+plugins:
+  - jekyll-feed
+  # Add other plugins here if needed
+
+# For Programming Blogs - Code Highlighting (uses Rouge by default with minima)
+markdown: kramdown
+kramdown:
+  input: GFM # GitHub Flavored Markdown
+  syntax_highlighter: rouge
+  syntax_highlighter_opts:
+    css_class: 'highlight'
+    # You might need to find/add CSS for your theme's highlighting style
