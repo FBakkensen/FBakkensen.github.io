@@ -1,7 +1,7 @@
 source "https://rubygems.org"
 
 gem "github-pages", group: :jekyll_plugins
-gem "jekyll-theme-hacker"
+gem "jekyll-remote-theme"
 
 # Add other potentially useful plugins
 gem "jekyll-feed"
