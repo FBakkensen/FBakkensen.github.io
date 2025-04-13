@@ -1,23 +1,24 @@
 title: BC Nerd
 author: Flemming Bakkensen
-email: flemming.bakkensen@gmail.com # Optional
-description: >- # Supports multi-line descriptions
-  All things BC but most about development in AL.
-baseurl: "" # Keep empty for user pages (your-username.github.io)
-url: "https://fbakkensen.github.io" # Your site's full URL
+email: flemming.bakkensen@gmail.com
+
+description: >-
+  Let's Nerd Out on Business Central!
+baseurl: ""
+url: "https://fbakkensen.github.io"
 github_username: FBakkensen
 
-# Build settings
-theme: minima # Default theme, change if you use another
+# Theme settings
+remote_theme: pages-themes/hacker@v0.2.0
 plugins:
   - jekyll-feed
-  # Add other plugins here if needed
+  - jekyll-remote-theme
+  - jekyll-seo-tag
 
-# For Programming Blogs - Code Highlighting (uses Rouge by default with minima)
+# Markdown settings
 markdown: kramdown
 kramdown:
-  input: GFM # GitHub Flavored Markdown
+  input: GFM
   syntax_highlighter: rouge
   syntax_highlighter_opts:
     css_class: 'highlight'
-    # You might need to find/add CSS for your theme's highlighting style
