@@ -1,12 +1,14 @@
-title: BC Nerd
+title: fbakkensen
 author: Flemming Bakkensen
 email: flemming.bakkensen@gmail.com
 
 description: >-
-  Let's Nerd Out on Business Central!
+  Let's Nerd Out.
 baseurl: "/"
 url: "https://fbakkensen.github.io"
 github_username: FBakkensen
+google_analytics: G-5FQ1BD5CNH
+show_downloads: false
 
 # Theme settings
 remote_theme: pages-themes/midnight@v0.2.0
