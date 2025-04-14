@@ -7,7 +7,6 @@ description: >-
 baseurl: "/"
 url: "https://fbakkensen.github.io"
 github_username: FBakkensen
-google_analytics: G-5FQ1BD5CNH
 show_downloads: false
 
 # Theme settings
