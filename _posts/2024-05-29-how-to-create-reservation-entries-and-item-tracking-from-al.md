@@ -10,6 +10,8 @@ To give you a little introduction, I tried to ask [ChatGTP](https://chat.openai.
 ![alt text](/assets/images/2024-05-29-how-to-create-reservation-entries-and-item-tracking-from-al/1721205769318.png)
 After that introduction, I will here try to remove a little bit of the confusing.
 
+<!--more-->
+
 I think, that one of the reasons, that this is a little confusing to many people, is that both Item Tracking and Reservations for non-posted documents and journals is stored in the “Reservation Entry” table.
 
 I will not do a full explanation of how Reservations and Item Tracking is stored in all scenarios. Microsoft has some articles of that, [Microsoft Docs - Item Tracking](https://learn.microsoft.com/en-us/dynamics365/business-central/design-details-item-tracking) and [Microsoft Docs - Reservation](https://learn.microsoft.com/en-us/dynamics365/business-central/design-details-reservation-order-tracking-and-action-messaging#reservation) But for this scenario where I will show to create Item Tracking Lines for a Sales Order and how to create Reservations for a Sales Order from Item Ledger Entries. For this, it is enough to understand the following difference in how data is stored.
