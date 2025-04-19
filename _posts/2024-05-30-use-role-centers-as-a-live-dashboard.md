@@ -7,7 +7,9 @@ tags: [BC, AL, Dashboard]   # Optional tags
 Sometimes you might need a dashboard like page in Business Central. For this purpose you could use Queues on a rolecenter, like the one below. But the issue with this, is that it loads the value when the rolecenter is opened, and for a dashboard feeling, you will want something that updates it self, especially if it is presented on a unattended screen, like a wall mounted big screen. I will in this post give you one solution to have “live” updated queues.
 
 ![alt text](/assets/images/2024-05-30-use-role-centers-as-a-live-dashboard/1721208966156.png)
+
 <!--more-->
+
 For this solution we are going to use a Page Background Task [Microsoft Docs - Background Tasks](https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/developer/devenv-page-background-tasks). This is not going to be an in depth showcase of Page Background Tasks, but in essential, you enqueue a Task, a tasks is an codeunit that is then running the OnRun event, and you can pass some parameters to it, in this case we are passing a parameter for how many milliseconds between each update of our dashboard.
 
 ```al
