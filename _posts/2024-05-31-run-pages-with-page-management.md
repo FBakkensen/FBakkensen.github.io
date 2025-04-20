@@ -9,7 +9,7 @@ description: Learn how to use Page Management to run pages dynamically in Busine
 ## Introduction
 
 Most Business Central developers are familiar with the `Page.Run()` procedure. By providing zero as the page number and a Record variable, you can run the Lookup Page defined for that record. For example, running the Item Lookup page:
-![alt text](../assets/images/2024-05-31-run-pages-with-page-management/1721201005740.png)
+![alt text](/assets/images/2024-05-31-run-pages-with-page-management/1721201005740.png)
 <!--more-->
 
 ```al
@@ -29,7 +29,7 @@ action(RunItem)
 ```
 
 As expected, this opens the Item Lookup page.
-![alt text](../assets/images/2024-05-31-run-pages-with-page-management/1721206732233.png)
+![alt text](/assets/images/2024-05-31-run-pages-with-page-management/1721206732233.png)
 
 ## When Page.Run() Has Limitations
 
@@ -57,7 +57,7 @@ action(RunGlJnlLine)
 ```
 
 This code will give an error because there is no Lookup page for the "Gen. Journal Line" record.
-![alt text](../assets/images/2024-05-31-run-pages-with-page-management/1721209165020.png)
+![alt text](/assets/images/2024-05-31-run-pages-with-page-management/1721209165020.png)
 
 ## Solving with Page Management
 
@@ -90,8 +90,8 @@ action(RunGenGlJnlLineWithPageManagement)
 ```
 
 This will open the General Journals page, as defined in the "Gen Journal Template".
-![alt text](../assets/images/2024-05-31-run-pages-with-page-management/1721209475882.png)
-![alt text](../assets/images/2024-05-31-run-pages-with-page-management/1721204496886.png)
+![alt text](/assets/images/2024-05-31-run-pages-with-page-management/1721209475882.png)
+![alt text](/assets/images/2024-05-31-run-pages-with-page-management/1721204496886.png)
 
 ## Conditional Page Selection
 
