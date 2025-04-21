@@ -14,6 +14,10 @@ With Business Central 2025 Wave 1 (BC 26), Microsoft introduced significant impr
 
 In this post, we'll explore practical patterns and best practices for method overloading between `Record` and `RecordRef` in AL 15.0, using standard tables like `Customer` and `Vendor`.
 
+![alt text](</assets/images/2025-04-23-method-overloading-with-record-and-recordref-in-al-for-business-central-2025-wave-1/ChatGPT Image Apr 21, 2025, 02_31_27 PM.png>)
+
+<!--more-->
+
 ## Method Overloading with Different Records
 
 Here's an example demonstrating overloading procedures using different strongly-typed records:
