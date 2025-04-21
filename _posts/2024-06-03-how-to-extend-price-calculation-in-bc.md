@@ -1,4 +1,5 @@
 ---
+layout: post
 title: "How to Extend Price Calculation in Business Central"
 date: 2024-06-03
 categories: [Business Central, AL, Development]

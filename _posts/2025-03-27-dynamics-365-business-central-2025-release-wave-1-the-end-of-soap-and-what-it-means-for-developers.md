@@ -1,4 +1,5 @@
 ---
+layout: post
 title: "Dynamics 365 Business Central 2025 Release Wave 1: The End of SOAP and What It Means for Developers"
 date: 2025-03-27
 categories: [Business Central, Development, Integration]

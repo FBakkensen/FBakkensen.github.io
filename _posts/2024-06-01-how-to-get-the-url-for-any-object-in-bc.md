@@ -1,4 +1,5 @@
 ---
+layout: post
 title: "How to get the URL for any object in BC"
 date: 2024-06-01
 categories: [Business Central, Development]

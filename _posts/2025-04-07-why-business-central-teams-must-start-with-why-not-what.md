@@ -1,4 +1,5 @@
 ---
+layout: post
 title: "Why Business Central Teams Must Start With \"Why\" — Not \"What\""
 date: 2025-04-07
 categories: [Business Central, Consulting, Development]

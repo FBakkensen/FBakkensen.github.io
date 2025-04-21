@@ -1,6 +1,7 @@
 title: fbakkensen
-author: Flemming Bakkensen
-email: flemming.bakkensen@gmail.com
+author:
+  name: Flemming Bakkensen
+  email: flemming.bakkensen@gmail.com
 
 description: >-
   Let's Nerd Out.
@@ -10,11 +11,17 @@ github_username: FBakkensen
 show_downloads: false
 
 # Theme settings
-remote_theme: pages-themes/midnight@v0.2.0
+remote_theme: jekyll/minima
 plugins:
   - jekyll-feed
   - jekyll-remote-theme
   - jekyll-seo-tag
+  - jekyll-paginate
+
+#site
+paginate: 5         # Posts per page
+paginate_path: "/page:num/"  # URL structure for paginated pages
+google_analytics: G-5FQ1BD5CNH # Google Analytics tracking ID
 
 # Markdown settings
 markdown: kramdown
@@ -24,3 +31,19 @@ kramdown:
   syntax_highlighter_opts:
     css_class: 'highlight'
 excerpt_separator: "<!--more-->"
+
+minima:
+  skin: solarized
+  show_excerpts: true
+  nav_pages:
+    about.md
+  social_links:
+    - title: fbakkensen at GitHub
+      icon: github
+      url: "https://github.com/FBakkensen"
+    - title: fbakkensen at X
+      icon: x-twitter
+      url: "https://x.com/fbakkensen"
+    - title: fbakkensen at LinkedIn
+      icon: linkedin
+      url: "https://www.linkedin.com/in/flemmingbakkensen/"

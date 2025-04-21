@@ -1,4 +1,5 @@
 ---
+layout: post
 title: "AI: The New Revolution Transforming How We Work and Compete"
 date: 2025-04-04
 categories: [Technology, AI, Innovation]

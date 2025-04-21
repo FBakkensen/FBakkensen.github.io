@@ -1,4 +1,5 @@
 ---
+layout: post
 title: "How to Add Price Calculation to Any Table in Business Central"
 date: 2024-06-04
 categories: [Business Central, AL, Development]

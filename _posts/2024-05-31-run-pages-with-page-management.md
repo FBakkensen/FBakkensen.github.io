@@ -1,4 +1,5 @@
 ---
+layout: post
 title: "Run Pages with Page Management in Business Central"
 date: 2024-05-31
 categories: [Business Central, AL, Development]

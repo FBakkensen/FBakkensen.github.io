@@ -1,4 +1,5 @@
 ---
+layout: post
 title: "How to Create Reservation Entries and Item Tracking from AL"
 date: 2024-05-29 11:50:00 +0200 # Date and time (optional time/timezone)
 categories: BC AL # Optional categories

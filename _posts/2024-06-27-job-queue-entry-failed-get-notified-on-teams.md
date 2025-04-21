@@ -1,4 +1,5 @@
 ---
+layout: post
 title: "Job Queue Entry Failed, Get Notified on Teams"
 date: 2024-06-27
 categories: [Business Central, Integration, Power Automate]

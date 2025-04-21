@@ -1,4 +1,5 @@
 ---
+layout: post
 title: "Add Retention Policy To Your Business Central App"
 date: 2024-06-15
 categories: [Business Central, AL, Development]

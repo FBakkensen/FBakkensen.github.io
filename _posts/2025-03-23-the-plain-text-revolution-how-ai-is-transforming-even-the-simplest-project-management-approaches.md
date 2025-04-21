@@ -1,4 +1,5 @@
 ---
+layout: post
 title: "The Plain Text Revolution: How AI is Transforming Even the Simplest Project Management Approaches"
 date: 2025-03-23
 categories: [AI, Productivity, Development]

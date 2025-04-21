@@ -1,4 +1,5 @@
 ---
+layout: post
 title: "Use Role Centers as a Live Dashboard"
 date: 2024-05-30 11:50:00 +0200 # Date and time (optional time/timezone)
 categories: BC AL # Optional categories
