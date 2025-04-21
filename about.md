@@ -3,9 +3,13 @@ layout: page
 title: About
 ---
 
+<img src="/assets/images/profilepicture.png" alt="Flemming Bakkensen" style="float: right; margin: 2em 0 1em 1em; width: 200px;">
+
 ## Introduction
 
-I am a seasoned Business Central Developer Advocate and Solution Architect with over two decades of experience in software development, solution design, and technical leadership. My expertise spans AL programming, API integrations, REST/JSON protocols, and clean code principles, all underpinned by a commitment to delivering high-quality solutions that simplify complexity.
+Hi, I'm Flemming Bakkensen, with over 20 years of experience. My goal is to share clear, actionable knowledge to help you master Business Central and stay ahead in the rapidly evolving ERP landscape.
+
+I am a seasoned Business Central Developer Advocate and Solution Architect with over two decades of experience in software development, solution design, and technical leadership. My expertise spans AL and C# programming, API integrations and clean code principles, all underpinned by a commitment to delivering high-quality solutions that simplify complexity.
 
 ## Experience and Collaboration
 

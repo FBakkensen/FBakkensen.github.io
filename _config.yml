@@ -35,15 +35,16 @@ excerpt_separator: "<!--more-->"
 minima:
   skin: solarized
   show_excerpts: true
+  hide_site_feed_link: true
   nav_pages:
     about.md
   social_links:
-    - title: fbakkensen at GitHub
-      icon: github
-      url: "https://github.com/FBakkensen"
-    - title: fbakkensen at X
-      icon: x-twitter
-      url: "https://x.com/fbakkensen"
     - title: fbakkensen at LinkedIn
       icon: linkedin
       url: "https://www.linkedin.com/in/flemmingbakkensen/"
+    - title: fbakkensen at X
+      icon: x-twitter
+      url: "https://x.com/fbakkensen"
+    - title: fbakkensen at GitHub
+      icon: github
+      url: "https://github.com/FBakkensen"
