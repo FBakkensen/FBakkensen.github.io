@@ -1,0 +1,11 @@
+<header class="site-header">
+  <div class="wrapper">
+    <img src="{{ '/assets/images/banner.jpg' | relative_url }}" alt="Banner" style="width: 100%; max-height: 200px; object-fit: cover;">
+    <div style="display: flex; align-items: center; margin-top: -60px;">
+      <a href="{{ '/' | relative_url }}">
+        <img src="{{ '/assets/images/logo.png' | relative_url }}" alt="Site Logo" style="height: 60px; margin-right: 16px;">
+      </a>
+    </div>
+    {% include nav.html %}
+  </div>
+</header>
