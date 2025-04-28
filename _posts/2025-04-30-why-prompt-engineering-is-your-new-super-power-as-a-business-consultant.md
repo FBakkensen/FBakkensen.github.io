@@ -42,7 +42,16 @@ Before diving into techniques, let’s clarify what prompt engineering is and wh
 
 Think of it as the bridge between your business expertise and the AI’s capabilities. The better your prompt, the better the AI output—and the better your Business Central solution. That flow is your new edge.
 
-![alt text](/assets/images/2025-04-30-why-prompt-engineering-is-your-new-super-power-as-a-business-consultant/crafting-the-perfect-prompt.png)
+## 🛠️ Why this matters for Business Central professionals
+
+As a Business Central consultant or developer, you’re already juggling complex tasks like gathering requirements, writing feature requests, coding, and debugging. Mastering prompt engineering can make these tasks faster and more effective. Imagine:
+
+- **Customer interviews:** Use AI to generate insightful questions and anticipate pain points.
+- **Feature requests:** Prompt for clear, structured requirements that reduce miscommunication.
+- **Coding:** Generate AL code snippets or debug faster with AI assistance.
+- **Debugging:** Get intelligent explanations and solutions for tricky issues.
+
+By learning to craft better prompts, you’ll unlock AI’s full potential and become more productive in your day-to-day work.
 
 ## 💡 Mini case study—requirement-gathering chatbot
 
