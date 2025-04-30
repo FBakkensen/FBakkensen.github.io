@@ -1,0 +1,44 @@
+# .github/workflows/nightly-build.yml
+name: Nightly Build & Deploy
+
+on:
+  # Run at 01:00 Copenhagen time (handle both CET & CEST)
+  schedule:
+    # 23:00 UTC → 01:00 CEST (summer)
+    - cron: '0 1 * * *'
+    
+  workflow_dispatch:              # allow manual runs
+  push:
+    branches: [ main ]            # rebuild immediately on any push
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1️⃣  Check out your site source
+      - uses: actions/checkout@v4
+
+      # 2️⃣  Set up Ruby
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.1'      # match your Gemfile / .ruby-version
+
+      # 3️⃣  Install gems
+      - name: Install dependencies
+        run: |
+          gem install bundler
+          bundle install --jobs 4 --retry 3
+
+      # 4️⃣  Build the site (NO --future flag)
+      - name: Build site
+        run: |
+          bundle exec jekyll build
+
+      # 5️⃣  Deploy the generated site to gh-pages
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./_site
+          commit_message: "chore: nightly build @ ${{ github.sha }}"
