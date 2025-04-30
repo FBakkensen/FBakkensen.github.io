@@ -2,7 +2,8 @@ name: Nightly Pages Rebuild
 
 on:
   schedule:
-    - cron: "0 1 * * *"  # Runs at 23:00 UTC, which is 01:00 CET (Central European Time) in winter
+    - cron: "0 1 * * *"  # Runs at 01:00 UTC
+  workflow_dispatch: # Add this to enable manual triggers
 
 jobs:
   rebuild-site:
