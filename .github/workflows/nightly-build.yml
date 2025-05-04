@@ -1,0 +1,21 @@
+name: Nightly Pages Rebuild
+
+on:
+  schedule:
+    - cron: "0 1 * * *"  # Runs at 01:00 UTC
+  workflow_dispatch: # Add this to enable manual triggers
+
+jobs:
+  rebuild-site:
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write        # allow using Pages API (or use repo scope PAT)
+      contents: read      # (contents read is usually default)
+    steps:
+      - name: Trigger GitHub Pages rebuild
+        env:
+          PAGES_TOKEN: ${{ secrets.PAGES_TOKEN }}
+        run: |
+          curl -X POST -H "Authorization: Bearer $PAGES_TOKEN" \
+               -H "Accept: application/vnd.github+json" \
+               https://api.github.com/repos/${{ github.repository }}/pages/builds
