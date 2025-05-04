@@ -7,7 +7,7 @@
 7. When relevant, the posts will include code snippets
 8. The code snippets will be formatted using Rouge
 9. when relevant include placeholders for images and infographics.
-10. For all placeholders add a prompt to have the AI generate the content.
+10. For all placeholders add a prompt to have the AI generate the content. Include information about the recommended size of the image and infographic.
 11. Use icons for headers to make the content more engaging.
 12. Use emojis to make the content more engaging.
 13. Use tables to give the reader a quick overview of the content.

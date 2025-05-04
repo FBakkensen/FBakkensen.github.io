@@ -14,3 +14,27 @@ Here are some ideas to get you started:
 - 😄 Pronouns: ...
 - ⚡ Fun fact: ...
 -->
+
+# FBakkensen.github.io
+
+🚀 My personal blog/portfolio powered by Jekyll and GitHub Pages
+
+## Local Development
+
+### Dependencies
+- [Ruby+Devkit 3.1.x](https://rubyinstaller.org/downloads/)
+- [Bundler](https://bundler.io/) (`gem install bundler`)
+
+### First-time setup
+```powershell
+# Install dependencies
+bundle install
+```
+
+### Running locally
+```powershell
+# Start Jekyll server with live reload
+bundle exec jekyll serve --livereload --future
+```
+
+Visit 👉 [http://localhost:4000](http://localhost:4000) after starting the server
