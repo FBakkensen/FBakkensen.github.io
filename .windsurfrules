@@ -1,0 +1,14 @@
+1. This is build using Jekyll
+2. This is hosted as a GitHub Pages site
+3. The blog posts are stored in the _posts folder
+4. This blog is targeted at AL developers
+5. The posts are written in Markdown
+6. The posts are formatted using Kramdown
+7. When relevant, the posts will include code snippets
+8. The code snippets will be formatted using Rouge
+9. when relevant include placeholders for images and infographics.
+10. For all placeholders add a prompt to have the AI generate the content.
+11. Use icons for headers to make the content more engaging.
+12. Use emojis to make the content more engaging.
+13. Use tables to give the reader a quick overview of the content.
+14. Use diagrams to give the reader a visual overview of the content.
