@@ -7,12 +7,13 @@ author: Flemming Bakkensen
 description: Learn how mastering input and output formats in your AI prompts can dramatically improve the quality, relevance, and usefulness of AI-generated results in Business Central projects.
 tags: [business central, ai, prompt engineering, input format, output format, consulting, productivity]
 ---
-
-# Laying the Groundwork - Understanding Input and Output Formats for AI Success
-
 Welcome back! In our ever-evolving tech landscape, Artificial Intelligence (AI) isn't just a buzzword anymore; it's rapidly becoming an indispensable co-pilot in our daily tasks. Whether you're architecting robust Business Central solutions, streamlining complex business processes, or enhancing how you connect with clients, knowing how to *talk* to AI effectively is the new frontier. This is the second installment in our series laser-focused on arming you with practical **AI Prompt Engineering** skills. If you're just joining us, I highly recommend checking out our first post to get up to speed: [Why Prompt Engineering is Your New Super Power as a Business Consultant](/business%20central/ai/consulting/2025/04/30/why-prompt-engineering-is-your-new-super-power-as-a-business-consultant.html).
 
 Today, we're getting down to the nuts and bolts – the foundational elements that can make or break your AI interactions: **understanding and mastering input and output formats**. Get this right, and you'll see a dramatic improvement in the quality, relevance, and sheer usefulness of what AI can generate for you. Think of it as laying a solid foundation before building a skyscraper. Ready to dig in?
+
+![alt text](/assets/images/2025-05-15-laying-the-groundwork-understanding-input-and-output-format-for-ai-success/header-image.png)
+
+<!--more-->
 
 ## 🎯 The Critical Role of Defined Output Formats
 
