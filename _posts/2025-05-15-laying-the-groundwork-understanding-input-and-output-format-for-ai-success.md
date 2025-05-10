@@ -1,6 +1,14 @@
-# Laying the Groundwork - Understanding Input and Output Formats for AI Success
+---
+layout: post
+title: "Laying the Groundwork - Understanding Input and Output Formats for AI Success"
+date: 2025-05-15
+categories: [Business Central, AI, Consulting]
+author: Flemming Bakkensen
+description: Learn how mastering input and output formats in your AI prompts can dramatically improve the quality, relevance, and usefulness of AI-generated results in Business Central projects.
+tags: [business central, ai, prompt engineering, input format, output format, consulting, productivity]
+---
 
-Hey there, Business Central Developers and Consultants!
+# Laying the Groundwork - Understanding Input and Output Formats for AI Success
 
 Welcome back! In our ever-evolving tech landscape, Artificial Intelligence (AI) isn't just a buzzword anymore; it's rapidly becoming an indispensable co-pilot in our daily tasks. Whether you're architecting robust Business Central solutions, streamlining complex business processes, or enhancing how you connect with clients, knowing how to *talk* to AI effectively is the new frontier. This is the second installment in our series laser-focused on arming you with practical **AI Prompt Engineering** skills. If you're just joining us, I highly recommend checking out our first post to get up to speed: [Why Prompt Engineering is Your New Super Power as a Business Consultant](https://fbakkensen.github.io/business%20central/ai/consulting/2025/04/30/why-prompt-engineering-is-your-new-super-power-as-a-business-consultant.html).
 
@@ -29,8 +37,7 @@ Consider this:
 
 The difference in output quality will be night and day!
 
-**[Placeholder for Infographic: "The Power of Precise Prompts: Vague vs. Specific AI Instructions"]**
-*(This infographic would visually reinforce how a specific prompt leads to targeted, actionable, and well-structured output, perfectly illustrating the point above.)*
+![alt text](/assets/images/2025-05-15-laying-the-groundwork-understanding-input-and-output-format-for-ai-success/vague-vs-precise-prompt.png)
 
 ## 🧩 The Power of Contextual Input: Helping AI See the Bigger Picture
 
@@ -102,8 +109,7 @@ Here's a quick update on the \[Client Name] project:
 **Blockers:**
 * \[AI to fill based on input]
 
-Best regards,
-\[Your Name]"
+
 
 This **AI Template Pattern** approach makes generating consistent communications a breeze!
 
