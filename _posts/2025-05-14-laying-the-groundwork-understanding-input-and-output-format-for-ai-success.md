@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Laying the Groundwork - Understanding Input and Output Formats for AI Success"
-date: 2025-05-15
+date: 2025-05-14
 categories: [Business Central, AI, Consulting]
 author: Flemming Bakkensen
 description: Learn how mastering input and output formats in your AI prompts can dramatically improve the quality, relevance, and usefulness of AI-generated results in Business Central projects.
@@ -11,7 +11,7 @@ Welcome back! In our ever-evolving tech landscape, Artificial Intelligence (AI) 
 
 Today, we're getting down to the nuts and bolts – the foundational elements that can make or break your AI interactions: **understanding and mastering input and output formats**. Get this right, and you'll see a dramatic improvement in the quality, relevance, and sheer usefulness of what AI can generate for you. Think of it as laying a solid foundation before building a skyscraper. Ready to dig in?
 
-![alt text](/assets/images/2025-05-15-laying-the-groundwork-understanding-input-and-output-format-for-ai-success/header-image.png)
+![alt text](/assets/images/2025-05-14-laying-the-groundwork-understanding-input-and-output-format-for-ai-success/header-image.png)
 
 <!--more-->
 
@@ -38,7 +38,7 @@ Consider this:
 
 The difference in output quality will be night and day!
 
-![alt text](/assets/images/2025-05-15-laying-the-groundwork-understanding-input-and-output-format-for-ai-success/vague-vs-precise-prompt.png)
+![alt text](/assets/images/2025-05-14-laying-the-groundwork-understanding-input-and-output-format-for-ai-success/vague-vs-precise-prompt.png)
 
 ## 🧩 The Power of Contextual Input: Helping AI See the Bigger Picture
 
