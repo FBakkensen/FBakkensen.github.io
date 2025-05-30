@@ -278,7 +278,6 @@ DEPENDENCIES
   github-pages
   jekyll-paginate
   jekyll-remote-theme
-  jekyll-sitemap
 
 BUNDLED WITH
    2.6.7
