@@ -24,6 +24,8 @@ Welcome to the third installment in our series on practical prompt engineering f
 | **Application** | 4-5 | Client interactions & requirements gathering | 🔄 Coming next |
 | **Implementation** | 6-7 | AL development & debugging with AI | 🔄 Advanced topics |
 
+<!--more-->
+
 **In this post (Part 3):** We'll explore meta prompting—using AI to help you craft better prompts, creating a powerful feedback loop that continuously improves your AI interactions and builds a valuable library of prompt templates for your consulting work.
 
 In today's fast-paced Business Central consulting environment, efficiency isn't just nice to have—it's essential. We've already explored why prompt engineering matters and how to structure your inputs and outputs. Now, let's take your AI interactions to the next level with a powerful concept: **meta prompting**.
