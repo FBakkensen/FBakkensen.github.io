@@ -146,8 +146,8 @@ document.addEventListener('DOMContentLoaded', function() {
   
   // Special JSON highlighter
   function highlightJson(code) {
-    // First escape the code
-    let result = escapeHtml(code);
+    // Work with the raw code first, then escape at the end
+    let result = code;
     
     // Replace strings with placeholders to handle them properly
     const stringPlaceholders = new Map();
@@ -161,16 +161,20 @@ document.addEventListener('DOMContentLoaded', function() {
       return placeholder;
     });
     
-    // Now process the placeholders
+    // Now escape the HTML (this won't affect our placeholders)
+    result = escapeHtml(result);
+    
+    // Process the placeholders
     stringPlaceholders.forEach((value, key) => {
+      const escapedValue = escapeHtml(value);
       // Check if this string is followed by a colon (making it a property key)
       const regex = new RegExp(key + '\\s*:', 'g');
       if (result.match(regex)) {
         // It's a property key
-        result = result.replace(key, `<span class="syntax-property">${value}</span>`);
+        result = result.replace(key, `<span class="syntax-property">${escapedValue}</span>`);
       } else {
         // It's a string value
-        result = result.replace(key, `<span class="syntax-string">${value}</span>`);
+        result = result.replace(key, `<span class="syntax-string">${escapedValue}</span>`);
       }
     });
     
