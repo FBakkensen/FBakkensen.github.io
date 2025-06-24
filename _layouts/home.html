@@ -30,25 +30,29 @@ layout: base
           <span class="prompt">PS C:\ALProjects\BCBlog&gt;</span> Get-ChildItem -Path .\posts\ -Filter *.md | Sort-Object LastWriteTime -Descending
         </div>
         {%- for post in posts -%}
-        <article class="post-preview">
-          <div class="post-header">
+        <article class="post-preview powershell-box">
+          <div class="ps-box-header">
             <time class="post-date">{{ post.date | date: "%Y-%m-%d" }}</time>
+            <span class="post-categories">{{ post.categories | join: " / " }}</span>
+          </div>
+          <div class="ps-box-content">
             <h2 class="post-title">
               <a href="{{ post.url | relative_url }}">{{ post.title | escape }}</a>
             </h2>
-          </div>
-          {%- if site.show_excerpts -%}
-            <div class="post-excerpt">
-              {{ post.excerpt | strip_html | truncatewords: 50 }}
+            
+            {%- if site.show_excerpts -%}
+              <div class="post-excerpt">
+                {{ post.excerpt | strip_html | truncatewords: 40 }}
+              </div>
+            {%- endif -%}
+            
+            <div class="post-footer">
+              <a href="{{ post.url | relative_url }}" class="read-more-link">
+                <span class="prompt">PS&gt;</span> Read-Post -FullContent
+              </a>
             </div>
-          {%- endif -%}
-          <a href="{{ post.url | relative_url }}" class="read-more">
-            <span class="prompt">PS&gt;</span> Get-Content .\posts\{{ post.title | slugify | truncate: 20 }}.md
-          </a>
+          </div>
         </article>
-        {%- unless forloop.last -%}
-          <div class="post-separator"></div>
-        {%- endunless -%}
         {%- endfor -%}
       </div>
 
@@ -119,7 +123,7 @@ layout: base
       <ul class="recent-posts">
         {% for post in site.posts limit:5 %}
           <li>
-            <a href="{{ post.url | relative_url }}">{{ post.title | truncate: 40 }}</a>
+            <a href="{{ post.url | relative_url }}" title="{{ post.title | escape }}">{{ post.title | truncate: 40 }}</a>
           </li>
         {% endfor %}
       </ul>

@@ -36,7 +36,29 @@ layout: base
   </header>
 
   <div class="post-content">
-    {{ content }}
+    {% assign content_parts = content | split: '<!--more-->' %}
+    {% if content_parts.size > 1 %}
+      <!-- Show excerpt part -->
+      {{ content_parts[0] }}
+      
+      <!-- Insert TOC after excerpt -->
+      {% if page.toc != false %}
+        <div class="post-toc">
+          <div class="toc-header">
+            <span class="prompt">PS&gt;</span> Get-BlogPostStructure -TableOfContents
+          </div>
+          <div class="toc-content">
+            {% include toc.html html=content %}
+          </div>
+        </div>
+      {% endif %}
+      
+      <!-- Show rest of content -->
+      {{ content_parts[1] }}
+    {% else %}
+      <!-- No more tag, show full content -->
+      {{ content }}
+    {% endif %}
   </div>
 
   <div class="post-navigation">

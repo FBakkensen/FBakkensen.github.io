@@ -30,6 +30,8 @@ kramdown:
   syntax_highlighter: rouge
   syntax_highlighter_opts:
     css_class: 'highlight'
+  auto_ids: true
+  toc_levels: 2..6
 excerpt_separator: "<!--more-->"
 
 # Custom theme settings
