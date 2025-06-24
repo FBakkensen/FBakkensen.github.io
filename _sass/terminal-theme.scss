@@ -1,0 +1,773 @@
+// PowerShell Theme Variables
+$ps-bg: #012456;
+$ps-fg: #ffffff;
+$ps-cyan: #00ffff;
+$ps-yellow: #ffff00;
+$ps-green: #00ff00;
+$ps-red: #ff0000;
+$ps-magenta: #ff00ff;
+$ps-darkgray: #808080;
+$ps-lightgray: #c0c0c0;
+$ps-header-bg: #003d82;
+$ps-border: #0066cc;
+
+// Typography
+$font-mono: 'Cascadia Code', 'Consolas', 'Monaco', 'Courier New', monospace;
+$font-size-base: 16px;
+$line-height-base: 1.6;
+
+// Mixin for code font settings
+@mixin code-font {
+  font-family: 'Cascadia Code', 'Consolas', monospace !important;
+  font-weight: 400;
+  font-size: 14px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-feature-settings: "liga" 1, "calt" 1; // Enable ligatures
+}
+
+// Global Styles
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: $font-mono;
+  font-size: $font-size-base;
+  line-height: $line-height-base;
+  color: $ps-fg;
+  background-color: $ps-bg;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  color: $ps-cyan;
+  text-decoration: none;
+  &:hover {
+    color: $ps-yellow;
+    text-decoration: underline;
+  }
+}
+
+// Terminal Container
+.terminal-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+// PowerShell Header
+.terminal-header {
+  background-color: $ps-header-bg;
+  border-bottom: 1px solid $ps-border;
+}
+
+.terminal-bar {
+  display: flex;
+  align-items: center;
+  padding: 8px 16px;
+  background-color: #001f3f;
+}
+
+.terminal-buttons {
+  display: flex;
+  gap: 0;
+  margin-left: auto;
+  order: 2;
+}
+
+.terminal-button {
+  width: 46px;
+  height: 30px;
+  border: none;
+  background-color: transparent;
+  color: $ps-lightgray;
+  font-family: 'Segoe MDL2 Assets', 'Segoe UI Symbol', sans-serif;
+  font-size: 10px;
+  line-height: 30px;
+  text-align: center;
+  cursor: default;
+  
+  &.minimize::before { content: '\E921'; }
+  &.maximize::before { content: '\E922'; }
+  &.close::before { content: '\E8BB'; }
+}
+
+.terminal-title {
+  flex: 1;
+  text-align: left;
+  color: $ps-lightgray;
+  font-size: 14px;
+  font-weight: 500;
+  order: 1;
+}
+
+.terminal-nav {
+  display: flex;
+  gap: 24px;
+  padding: 16px 24px;
+  flex-wrap: wrap;
+  
+  .nav-link {
+    color: $ps-fg;
+    &:hover {
+      color: $ps-yellow;
+    }
+  }
+  
+  .linkedin-button {
+    color: $ps-cyan;
+    font-weight: bold;
+    padding: 4px 12px;
+    border: 1px solid $ps-cyan;
+    border-radius: 2px;
+    transition: all 0.3s ease;
+    
+    &:hover {
+      background-color: $ps-cyan;
+      color: $ps-bg;
+      text-decoration: none;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    }
+  }
+}
+
+// Main Content
+.terminal-main {
+  flex: 1;
+  padding: 24px;
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+// PowerShell Prompt styling
+.prompt {
+  color: $ps-yellow;
+  font-weight: bold;
+}
+
+// Home Layout
+.home-container {
+  display: flex;
+  gap: 32px;
+  
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
+}
+
+.main-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.welcome-message {
+  background-color: $ps-header-bg;
+  border: 1px solid $ps-border;
+  border-radius: 4px;
+  padding: 24px;
+  margin-bottom: 32px;
+  font-size: 16px;
+  line-height: 1.8;
+  
+  p {
+    margin: 0;
+  }
+}
+
+.section-divider {
+  margin: 32px 0;
+  font-size: 14px;
+  color: $ps-lightgray;
+  
+  .divider-line {
+    margin-top: 8px;
+    height: 1px;
+    background: repeating-linear-gradient(
+      to right,
+      $ps-darkgray 0,
+      $ps-darkgray 2px,
+      transparent 2px,
+      transparent 4px
+    );
+  }
+}
+
+.sidebar {
+  width: 300px;
+  
+  @media (max-width: 768px) {
+    width: 100%;
+  }
+}
+
+.sidebar-section {
+  background-color: $ps-header-bg;
+  border: 1px solid $ps-border;
+  padding: 16px;
+  margin-bottom: 24px;
+  border-radius: 4px;
+  
+  h3 {
+    margin: 0 0 16px 0;
+    font-size: 14px;
+    color: $ps-fg;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+  }
+}
+
+.tag-cloud {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  
+  .tag-link {
+    display: inline-block;
+    padding: 4px 8px;
+    background-color: $ps-bg;
+    border: 1px solid $ps-border;
+    border-radius: 4px;
+    font-size: 14px;
+    transition: all 0.2s ease;
+    
+    &:hover {
+      border-color: $ps-yellow;
+      text-decoration: none;
+    }
+    
+    .tag-count {
+      color: $ps-lightgray;
+      font-size: 12px;
+    }
+  }
+}
+
+.about-widget {
+  .whoami-output {
+    font-family: $font-mono;
+    color: $ps-cyan;
+    margin-bottom: 16px;
+    padding: 8px;
+    background-color: rgba(0, 255, 255, 0.1);
+    border-radius: 2px;
+  }
+}
+
+.social-links {
+  margin-top: 16px;
+  font-size: 12px;
+  
+  a {
+    display: block;
+    margin-bottom: 8px;
+    color: $ps-lightgray;
+    
+    &:hover {
+      color: $ps-cyan;
+      text-decoration: none;
+      
+      .prompt {
+        color: $ps-cyan;
+      }
+    }
+    
+    .prompt {
+      color: $ps-darkgray;
+      font-size: 11px;
+    }
+  }
+}
+
+.linkedin-cta {
+  display: inline-block;
+  margin-top: 12px;
+  padding: 8px 16px;
+  background-color: $ps-cyan;
+  color: $ps-bg;
+  border-radius: 2px;
+  font-weight: bold;
+  transition: all 0.3s ease;
+  font-size: 14px;
+  
+  &:hover {
+    background-color: lighten($ps-cyan, 10%);
+    text-decoration: none;
+    transform: translateY(-2px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  }
+}
+
+.recent-posts {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  
+  li {
+    padding: 8px 0;
+    border-bottom: 1px solid $ps-border;
+    
+    &:last-child {
+      border-bottom: none;
+    }
+    
+    a {
+      display: block;
+      font-size: 14px;
+    }
+  }
+}
+
+// Post List
+.post-list {
+  margin-top: 24px;
+  
+  .terminal-prompt {
+    margin-bottom: 24px;
+    padding: 12px;
+    background-color: rgba(0, 61, 130, 0.3);
+    border-left: 4px solid $ps-cyan;
+    font-size: 14px;
+  }
+}
+
+.post-preview {
+  margin-bottom: 32px;
+  
+  .post-header {
+    margin-bottom: 12px;
+  }
+  
+  .post-date {
+    color: $ps-lightgray;
+    font-size: 14px;
+    font-family: $font-mono;
+  }
+  
+  .post-title {
+    margin: 8px 0;
+    font-size: 24px;
+    
+    a {
+      color: $ps-fg;
+      &:hover {
+        color: $ps-yellow;
+      }
+    }
+  }
+  
+  .post-excerpt {
+    color: $ps-lightgray;
+    margin: 16px 0;
+  }
+  
+  .read-more {
+    color: $ps-cyan;
+    font-size: 14px;
+  }
+}
+
+.post-separator {
+  height: 1px;
+  background-color: $ps-border;
+  margin: 24px 0;
+}
+
+// Pagination
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 24px;
+  margin-top: 48px;
+  padding: 24px 0;
+  border-top: 1px solid $ps-border;
+  
+  .pagination-link {
+    color: $ps-cyan;
+    padding: 8px 16px;
+    border: 1px solid $ps-border;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+    
+    &:hover:not(.disabled) {
+      border-color: $ps-yellow;
+      background-color: $ps-header-bg;
+      text-decoration: none;
+    }
+    
+    &.disabled {
+      color: $ps-lightgray;
+      cursor: not-allowed;
+    }
+  }
+  
+  .page-number {
+    color: $ps-lightgray;
+    font-size: 14px;
+  }
+}
+
+// Post/Page Styles
+.post, .page {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.post-header, .page-header {
+  margin-bottom: 32px;
+  
+  .terminal-prompt {
+    color: $ps-lightgray;
+    font-size: 14px;
+    margin-bottom: 16px;
+  }
+}
+
+.post-title, .page-title {
+  font-size: 36px;
+  margin: 0 0 16px 0;
+  color: $ps-fg;
+  line-height: 1.2;
+}
+
+.post-meta {
+  color: $ps-lightgray;
+  font-size: 14px;
+  
+  .meta-separator {
+    margin: 0 8px;
+  }
+  
+  .category {
+    color: $ps-magenta;
+  }
+}
+
+.post-tags {
+  margin-top: 8px;
+  
+  .tag {
+    color: $ps-cyan;
+    &:hover {
+      color: $ps-yellow;
+    }
+  }
+}
+
+.post-content, .page-content {
+  h1, h2, h3, h4, h5, h6 {
+    margin-top: 32px;
+    margin-bottom: 16px;
+    color: $ps-yellow;
+  }
+  
+  p {
+    margin-bottom: 16px;
+  }
+  
+  code {
+    background-color: $ps-header-bg;
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-family: 'Cascadia Code', 'Consolas', monospace;
+    font-size: 0.9em;
+    color: $ps-cyan;
+    
+    // AL keywords in inline code
+    &.language-al {
+      color: #569cd6;
+      background-color: rgba(0, 120, 212, 0.1);
+    }
+    
+    // PowerShell cmdlets in inline code
+    &.language-powershell {
+      color: $ps-cyan;
+      background-color: rgba(0, 255, 255, 0.1);
+    }
+  }
+  
+  pre {
+    background-color: $ps-header-bg;
+    border: 1px solid $ps-border;
+    border-radius: 4px;
+    padding: 0;
+    overflow-x: auto;
+    position: relative;
+    margin: 24px 0;
+    
+    code {
+      background: none;
+      padding: 16px;
+      font-size: 14px;
+      display: block;
+    }
+  }
+  
+  blockquote {
+    border-left: 4px solid $ps-cyan;
+    padding-left: 16px;
+    margin-left: 0;
+    color: $ps-lightgray;
+    font-style: italic;
+  }
+  
+  img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 24px auto;
+    border: 1px solid $ps-border;
+    border-radius: 4px;
+  }
+  
+  ul, ol {
+    margin-bottom: 16px;
+    padding-left: 32px;
+  }
+  
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 16px;
+    
+    th, td {
+      padding: 8px;
+      border: 1px solid $ps-border;
+      text-align: left;
+    }
+    
+    th {
+      background-color: $ps-header-bg;
+      font-weight: bold;
+    }
+  }
+}
+
+.post-navigation {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 48px;
+  padding-top: 24px;
+  border-top: 1px solid $ps-border;
+  gap: 16px;
+  
+  a {
+    color: $ps-cyan;
+    &:hover {
+      color: $ps-yellow;
+    }
+  }
+  
+  .prev-post {
+    margin-right: auto;
+  }
+  
+  .next-post {
+    margin-left: auto;
+    text-align: right;
+  }
+}
+
+// Footer
+.terminal-footer {
+  background-color: $ps-header-bg;
+  border-top: 1px solid $ps-border;
+  padding: 24px;
+  margin-top: 48px;
+  
+  .footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+    font-size: 14px;
+    
+    .output {
+      color: $ps-lightgray;
+    }
+  }
+  
+  .footer-social {
+    margin-top: 16px;
+    font-size: 13px;
+    
+    a {
+      color: $ps-lightgray;
+      padding: 0 8px;
+      
+      &:hover {
+        color: $ps-cyan;
+      }
+    }
+    
+    .separator {
+      color: $ps-darkgray;
+    }
+  }
+}
+
+// Syntax Highlighting (Rouge)
+.highlight {
+  background-color: $ps-header-bg;
+  
+  .c { color: $ps-darkgray; } // Comment
+  .k { color: $ps-cyan; } // Keyword
+  .o { color: $ps-fg; } // Operator
+  .p { color: $ps-fg; } // Punctuation
+  .s { color: $ps-yellow; } // String
+  .n { color: $ps-fg; } // Name
+  .m { color: $ps-green; } // Number
+  .na { color: $ps-cyan; } // Name.Attribute
+  .nb { color: $ps-yellow; } // Name.Builtin
+  .nc { color: $ps-cyan; } // Name.Class
+  .nf { color: $ps-yellow; } // Name.Function
+  .nn { color: $ps-fg; } // Name.Namespace
+  .nt { color: $ps-cyan; } // Name.Tag
+  .nv { color: $ps-cyan; } // Name.Variable
+}
+
+// Code block wrapper
+.code-block-wrapper {
+  position: relative;
+  margin: 24px 0;
+  border: 2px solid #0078d4;
+  border-radius: 4px;
+  background-color: #1e1e1e;
+  overflow: hidden;
+  
+  // Header for language label
+  .code-header {
+    position: sticky;
+    position: -webkit-sticky;
+    top: 0;
+    left: 0;
+    right: 0;
+    background-color: #0078d4;
+    color: white;
+    padding: 8px 16px;
+    font-size: 12px;
+    font-weight: bold;
+    z-index: 10;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  // Copy button
+  .copy-button {
+    padding: 4px 8px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 2px;
+    color: white;
+    font-size: 11px;
+    font-family: 'Cascadia Code', 'Consolas', monospace;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    
+    &:hover {
+      background-color: rgba(255, 255, 255, 0.2);
+      border-color: rgba(255, 255, 255, 0.5);
+    }
+    
+    &.copied {
+      background-color: #00ff00;
+      color: #1e1e1e;
+      border-color: #00ff00;
+    }
+  }
+  
+  pre {
+    margin: 0;
+    border: none;
+    background-color: transparent;
+    overflow-x: auto;
+    overflow-y: hidden;
+    
+    code {
+      @include code-font;
+      display: block;
+      padding: 16px !important;
+      background-color: transparent !important;
+      color: #d4d4d4 !important;
+      line-height: 1.5;
+    }
+  }
+}
+
+
+
+
+
+
+
+
+
+
+// Add line numbers for longer code blocks
+.highlight {
+  pre.lineno {
+    color: $ps-darkgray;
+    border-right: 1px solid $ps-border;
+    padding-right: 8px;
+    margin-right: 8px;
+  }
+}
+
+// Custom syntax highlighting classes (VS Code Dark+ theme)
+.syntax-keyword { color: #569cd6 !important; } // Keywords (blue)
+.syntax-string { color: #ce9178 !important; } // Strings (orange)
+.syntax-comment { color: #6a9955 !important; } // Comments (green)
+.syntax-number { color: #b5cea8 !important; } // Numbers (light green)
+.syntax-function { color: #dcdcaa !important; } // Functions (yellow)
+.syntax-type { color: #4ec9b0 !important; } // Types/Classes (teal)
+.syntax-variable { color: #9cdcfe !important; } // Variables (light blue)
+.syntax-operator { color: #d4d4d4 !important; } // Operators (default)
+.syntax-property { color: #9cdcfe !important; } // Properties (light blue)
+.syntax-tag { color: #569cd6 !important; } // XML/HTML tags (blue)
+.syntax-attribute { color: #9cdcfe !important; } // Attributes (light blue)
+.syntax-punctuation { color: #d4d4d4 !important; } // Punctuation (default)
+.syntax-builtin { color: #c586c0 !important; } // Built-in functions (purple)
+.syntax-decorator { color: #d7ba7d !important; } // Decorators (gold)
+.syntax-constant { color: #569cd6 !important; } // Constants (blue)
+.syntax-namespace { color: #4ec9b0 !important; } // Namespaces (teal)
+.syntax-parameter { color: #9cdcfe !important; } // Parameters (light blue)
+
+// Tag Page
+.tag-page {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.tag-header {
+  margin-bottom: 32px;
+  
+  .terminal-prompt {
+    color: $ps-lightgray;
+    font-size: 14px;
+    margin-bottom: 16px;
+  }
+}
+
+.tag-title {
+  font-size: 32px;
+  color: $ps-fg;
+  margin: 0;
+}
+
+.back-link {
+  margin-top: 48px;
+  padding-top: 24px;
+  border-top: 1px solid $ps-border;
+  
+  a {
+    color: $ps-cyan;
+    &:hover {
+      color: $ps-yellow;
+    }
+  }
+}

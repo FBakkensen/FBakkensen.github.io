@@ -1,0 +1,160 @@
+---
+layout: page
+title: Tags
+permalink: /tags/
+---
+
+<div class="tags-page">
+  <div class="terminal-prompt">
+    <span class="prompt">PS C:\ALProjects\BCBlog&gt;</span> Get-Tags | Group-Object -Property Name | Sort-Object Count -Descending
+  </div>
+  
+  <div id="tag-cloud" class="tag-cloud-page">
+    <!-- Tags will be populated by JavaScript -->
+  </div>
+  
+  <div class="terminal-prompt" style="margin-top: 32px;">
+    <span class="prompt">PS C:\ALProjects\BCBlog&gt;</span> Get-BlogPosts -Tag "<span id="selected-tag">all</span>"
+  </div>
+  
+  <div id="tag-posts" class="tag-posts">
+    <!-- Posts will be populated by JavaScript -->
+  </div>
+</div>
+
+<script>
+// Collect all posts with their tags
+const posts = [
+  {% for post in site.posts %}
+  {
+    title: {{ post.title | jsonify }},
+    url: {{ post.url | jsonify }},
+    date: {{ post.date | date: "%Y-%m-%d" | jsonify }},
+    excerpt: {{ post.excerpt | strip_html | truncatewords: 50 | jsonify }},
+    tags: {{ post.tags | jsonify }}
+  }{% unless forloop.last %},{% endunless %}
+  {% endfor %}
+];
+
+// Count tags
+const tagCounts = {};
+posts.forEach(post => {
+  if (post.tags) {
+    post.tags.forEach(tag => {
+      tagCounts[tag] = (tagCounts[tag] || 0) + 1;
+    });
+  }
+});
+
+// Display tag cloud
+const tagCloudEl = document.getElementById('tag-cloud');
+Object.entries(tagCounts)
+  .sort((a, b) => b[1] - a[1])
+  .forEach(([tag, count]) => {
+    const tagLink = document.createElement('a');
+    tagLink.href = '#' + tag.toLowerCase().replace(/\s+/g, '-');
+    tagLink.className = 'tag-link';
+    tagLink.innerHTML = `<span class="tag-name">${tag}</span> <span class="tag-count">(${count})</span>`;
+    tagLink.onclick = (e) => {
+      e.preventDefault();
+      showPostsForTag(tag);
+    };
+    tagCloudEl.appendChild(tagLink);
+  });
+
+// Show all posts initially
+showAllPosts();
+
+// Function to show posts for a specific tag
+function showPostsForTag(tag) {
+  document.getElementById('selected-tag').textContent = tag;
+  const filteredPosts = posts.filter(post => 
+    post.tags && post.tags.includes(tag)
+  );
+  displayPosts(filteredPosts);
+  
+  // Update active tag
+  document.querySelectorAll('.tag-link').forEach(link => {
+    link.classList.remove('active');
+    if (link.textContent.includes(tag)) {
+      link.classList.add('active');
+    }
+  });
+}
+
+// Function to show all posts
+function showAllPosts() {
+  document.getElementById('selected-tag').textContent = 'all';
+  displayPosts(posts);
+}
+
+// Function to display posts
+function displayPosts(postsToShow) {
+  const container = document.getElementById('tag-posts');
+  container.innerHTML = '';
+  
+  postsToShow.forEach(post => {
+    const postEl = document.createElement('article');
+    postEl.className = 'post-preview';
+    postEl.innerHTML = `
+      <div class="post-header">
+        <time class="post-date">${post.date}</time>
+        <h2 class="post-title">
+          <a href="${post.url}">${post.title}</a>
+        </h2>
+      </div>
+      <div class="post-excerpt">
+        ${post.excerpt}
+      </div>
+      <a href="${post.url}" class="read-more">
+        <span class="prompt">PS&gt;</span> Get-Content .\\posts\\${post.title.toLowerCase().replace(/[^a-z0-9]/g, '-').substring(0, 20)}.md
+      </a>
+    `;
+    container.appendChild(postEl);
+    
+    // Add separator
+    if (postsToShow.indexOf(post) < postsToShow.length - 1) {
+      const separator = document.createElement('div');
+      separator.className = 'post-separator';
+      container.appendChild(separator);
+    }
+  });
+}
+
+// Handle hash changes
+window.addEventListener('hashchange', () => {
+  const tag = decodeURIComponent(window.location.hash.slice(1).replace(/-/g, ' '));
+  if (tag && tagCounts[tag]) {
+    showPostsForTag(tag);
+  } else {
+    showAllPosts();
+  }
+});
+
+// Check initial hash
+if (window.location.hash) {
+  const tag = decodeURIComponent(window.location.hash.slice(1).replace(/-/g, ' '));
+  if (tag && tagCounts[tag]) {
+    showPostsForTag(tag);
+  }
+}
+</script>
+
+<style>
+.tag-cloud-page {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin: 24px 0;
+}
+
+.tag-link.active {
+  background-color: {{ site.ps-cyan | default: '#00ffff' }};
+  color: {{ site.ps-bg | default: '#012456' }};
+  border-color: {{ site.ps-cyan | default: '#00ffff' }};
+}
+
+.tag-posts {
+  margin-top: 24px;
+}
+</style>

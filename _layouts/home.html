@@ -1,0 +1,128 @@
+---
+layout: base
+---
+<div class="home-container">
+  <div class="main-content">
+    {%- if page.title -%}
+      <h1 class="page-heading">
+        <span class="prompt">PS&gt;</span> Write-Output "{{ page.title }}"
+      </h1>
+    {%- endif -%}
+
+    <div class="welcome-message">
+      {{ content }}
+    </div>
+
+    <div class="section-divider">
+      <span class="prompt">PS C:\ALProjects\BCBlog&gt;</span> Write-Host ("-" * 80) -ForegroundColor DarkGray
+      <div class="divider-line"></div>
+    </div>
+
+    {% if site.paginate %}
+      {% assign posts = paginator.posts %}
+    {% else %}
+      {% assign posts = site.posts %}
+    {% endif %}
+
+    {%- if posts.size > 0 -%}
+      <div class="post-list">
+        <div class="terminal-prompt">
+          <span class="prompt">PS C:\ALProjects\BCBlog&gt;</span> Get-ChildItem -Path .\posts\ -Filter *.md | Sort-Object LastWriteTime -Descending
+        </div>
+        {%- for post in posts -%}
+        <article class="post-preview">
+          <div class="post-header">
+            <time class="post-date">{{ post.date | date: "%Y-%m-%d" }}</time>
+            <h2 class="post-title">
+              <a href="{{ post.url | relative_url }}">{{ post.title | escape }}</a>
+            </h2>
+          </div>
+          {%- if site.show_excerpts -%}
+            <div class="post-excerpt">
+              {{ post.excerpt | strip_html | truncatewords: 50 }}
+            </div>
+          {%- endif -%}
+          <a href="{{ post.url | relative_url }}" class="read-more">
+            <span class="prompt">PS&gt;</span> Get-Content .\posts\{{ post.title | slugify | truncate: 20 }}.md
+          </a>
+        </article>
+        {%- unless forloop.last -%}
+          <div class="post-separator"></div>
+        {%- endunless -%}
+        {%- endfor -%}
+      </div>
+
+      {% if site.paginate %}
+        <nav class="pagination">
+          {%- if paginator.previous_page %}
+            <a href="{{ paginator.previous_page_path | relative_url }}" class="pagination-link prev">
+              <span class="prompt">&lt;</span> prev
+            </a>
+          {%- else %}
+            <span class="pagination-link disabled"><span class="prompt">&lt;</span> prev</span>
+          {%- endif %}
+          
+          <span class="page-number">
+            Page {{ paginator.page }} of {{ paginator.total_pages }}
+          </span>
+          
+          {%- if paginator.next_page %}
+            <a href="{{ paginator.next_page_path | relative_url }}" class="pagination-link next">
+              next <span class="prompt">&gt;</span>
+            </a>
+          {%- else %}
+            <span class="pagination-link disabled">next <span class="prompt">&gt;</span></span>
+          {%- endif %}
+        </nav>
+      {%- endif %}
+    {%- endif -%}
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-section">
+      <h3><span class="prompt">PS&gt;</span> Get-BlogTags</h3>
+      <div class="tag-cloud">
+        {% assign tags = site.tags | sort %}
+        {% for tag in tags %}
+          <a href="/tags/#{{ tag[0] | slugify }}" class="tag-link">
+            <span class="tag-name">{{ tag[0] }}</span>
+            <span class="tag-count">({{ tag[1].size }})</span>
+          </a>
+        {% endfor %}
+      </div>
+    </div>
+
+    <div class="sidebar-section">
+      <h3><span class="prompt">PS&gt;</span> whoami</h3>
+      <div class="about-widget">
+        <p class="whoami-output">BCDEV\{{ site.author.name | replace: " ", "." | downcase }}</p>
+        <p>{{ site.description }}</p>
+        <a href="{{ site.linkedin_url }}" class="linkedin-cta" target="_blank" rel="noopener noreferrer">
+          <span class="prompt">PS&gt;</span> Connect-BCCommunity
+        </a>
+        <div class="social-links">
+          <a href="{{ site.github_url }}" target="_blank" rel="noopener noreferrer" title="GitHub">
+            <span class="prompt">PS&gt;</span> git remote -v
+          </a>
+          <a href="{{ site.twitter_url }}" target="_blank" rel="noopener noreferrer" title="X (Twitter)">
+            <span class="prompt">PS&gt;</span> Invoke-WebRequest x.com/@FBakkensen
+          </a>
+          <a href="{{ site.bluesky_url }}" target="_blank" rel="noopener noreferrer" title="Bluesky">
+            <span class="prompt">PS&gt;</span> Invoke-WebRequest fbakkensen.bsky.social
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="sidebar-section">
+      <h3><span class="prompt">PS&gt;</span> Get-RecentPosts -Count 5</h3>
+      <ul class="recent-posts">
+        {% for post in site.posts limit:5 %}
+          <li>
+            <a href="{{ post.url | relative_url }}">{{ post.title | truncate: 40 }}</a>
+          </li>
+        {% endfor %}
+      </ul>
+    </div>
+  </aside>
+</div>

@@ -56,7 +56,7 @@ The persona technique is one of the most powerful tools in your prompt engineeri
 ### Persona Variations for Different Scenarios
 
 **For Financial Focus:**
-```
+```md
 Act as a Business Central financial consultant with deep expertise in multi-entity
 consolidations. You're preparing to interview the CFO of a company with 5 subsidiaries
 across different countries. Generate questions that will uncover their consolidation
@@ -64,7 +64,7 @@ pain points, reporting requirements, and compliance needs.
 ```
 
 **For Operations Focus:**
-```
+```md
 Act as a Business Central operations specialist who has implemented BC for 50+
 manufacturing companies. You're meeting with the production manager of an automotive
 parts manufacturer. Create questions that explore their shop floor processes,
@@ -72,7 +72,7 @@ quality control needs, and supply chain challenges.
 ```
 
 **For Technical Integration:**
-```
+```md
 Act as a Business Central technical architect with extensive API and integration
 experience. You're interviewing the IT director about connecting BC with their
 existing CRM, e-commerce platform, and warehouse management system. Develop
@@ -88,7 +88,7 @@ Let's move beyond generic questions to create targeted inquiries that uncover re
 **Level 1: Surface Questions** (Difficulty: ⭐ Beginner | Time: 5 minutes)
 These establish basic facts and current state:
 
-```
+```md
 Generate 10 factual questions about a company's current inventory management
 processes in preparation for a Business Central implementation. Focus on
 volumes, locations, and basic workflows.
@@ -97,7 +97,7 @@ volumes, locations, and basic workflows.
 **Level 2: Diagnostic Questions** (Difficulty: ⭐⭐ Intermediate | Time: 10 minutes)
 These uncover problems and inefficiencies:
 
-```
+```md
 Act as a Business Central consultant analyzing inventory challenges. Create
 10 diagnostic questions that will help identify pain points, bottlenecks,
 and inefficiencies in a retail company's current inventory management.
@@ -107,7 +107,7 @@ Include questions about stockouts, overstock situations, and visibility issues.
 **Level 3: Strategic Questions** (Difficulty: ⭐⭐⭐ Advanced | Time: 15 minutes)
 These explore future vision and success metrics:
 
-```
+```md
 As an experienced Business Central strategist, develop 10 forward-looking
 questions that explore how improved inventory management could transform
 this retail company's competitive position. Include questions about growth
@@ -129,7 +129,7 @@ plans, customer experience goals, and measurable business outcomes.
 
 **Chain Prompting for Comprehensive Coverage:**
 
-```
+```md
 Step 1: "List the top 5 business processes that typically cause pain for
         growing retail companies considering Business Central."
 
@@ -159,7 +159,7 @@ Using AI, we can generate interview outlines following this proven framework:
 
 **Sample Prompt for Framework-Based Outline:**
 
-```
+```md
 Create a 60-minute Business Central discovery session outline following the
 DISCOVER framework for a wholesale distributor. Include:
 - Time allocations for each section
@@ -186,7 +186,7 @@ Different client situations require different interview approaches. Here's how t
 
 **30-Minute Executive Briefing:**
 
-```
+```md
 Act as a Business Central consultant preparing for a brief executive meeting.
 Create a focused 30-minute interview outline that:
 - Captures strategic business drivers (10 min)
@@ -198,7 +198,7 @@ Include suggested executive-level questions for each section.
 
 **2-Hour Deep Dive Session:**
 
-```
+```md
 Design a comprehensive 2-hour discovery session outline for Business Central
 implementation in a manufacturing company. Structure it as:
 - Current State Assessment (45 min)
@@ -216,7 +216,7 @@ Walking into a client meeting well-informed about their business, industry chall
 
 **Step 1: Company Intelligence Synthesis**
 
-```
+```md
 Summarize the following information about [Company Name] in preparation for
 a Business Central consultation:
 - Industry: [Industry]
@@ -230,7 +230,7 @@ Highlight potential pain points common to similar companies.
 
 **Step 2: Industry Challenge Analysis**
 
-```
+```md
 Act as a Business Central industry expert. Based on current trends in the
 [specific industry] sector, identify:
 1. Top 5 operational challenges companies typically face
@@ -241,7 +241,7 @@ Act as a Business Central industry expert. Based on current trends in the
 
 **Step 3: Competitive Landscape Assessment**
 
-```
+```md
 Analyze the competitive landscape for [Company Name] in [Industry].
 Generate insights about:
 - How advanced ERP capabilities could provide competitive advantage
@@ -272,7 +272,7 @@ The ability to anticipate client challenges before they voice them is what separ
 
 **Industry-Specific Pain Point Analysis:**
 
-```
+```md
 Act as a Business Central consultant with deep experience in [Industry].
 Based on a company with these characteristics:
 - Size: [Employee count]
@@ -301,7 +301,7 @@ For each point, explain why it's likely and how to sensitively explore it in con
 
 **For Change Management Concerns:**
 
-```
+```md
 Generate a list of likely change management concerns for a [Industry] company
 with [X] employees moving from [Current System] to Business Central. For each concern:
 - Explain why it typically arises
@@ -312,7 +312,7 @@ with [X] employees moving from [Current System] to Business Central. For each co
 
 **For Technical Integration Challenges:**
 
-```
+```md
 As a Business Central technical architect, anticipate integration challenges for a company using:
 - CRM: [System]
 - E-commerce: [Platform]
@@ -341,7 +341,7 @@ To continuously improve your interview skills, track these key metrics:
 
 ### Post-Interview Improvement Prompts
 
-```
+```md
 Based on these interview notes: [paste notes]
 And this original interview outline: [paste outline]
 
@@ -360,7 +360,7 @@ Suggest improvements for the next similar interview.
 
 Prepare for different conversation directions:
 
-```
+```md
 Create 3 different interview flow scenarios for a Business Central discovery session with a growing retailer:
 
 Scenario A: They're mainly concerned about inventory accuracy
@@ -387,7 +387,7 @@ Different stakeholders require different approaches:
 
 ### The Challenge-Solution Mapping Technique
 
-```
+```md
 Based on common challenges in [Industry], create a challenge-solution map where:
 - Each challenge has 3 probing questions to confirm its presence
 - Each confirmed challenge maps to specific BC capabilities

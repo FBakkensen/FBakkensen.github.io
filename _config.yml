@@ -11,10 +11,9 @@ github_username: FBakkensen
 show_downloads: false
 
 # Theme settings
-remote_theme: jekyll/minima
+# Using custom terminal-style theme
 plugins:
   - jekyll-feed
-  - jekyll-remote-theme
   - jekyll-seo-tag
   - jekyll-paginate
   - jekyll-sitemap
@@ -33,19 +32,22 @@ kramdown:
     css_class: 'highlight'
 excerpt_separator: "<!--more-->"
 
-minima:
-  skin: classic
-  show_excerpts: true
-  hide_site_feed_link: true
-  nav_pages:
-    about.md
-  social_links:
-    - title: fbakkensen at LinkedIn
-      icon: linkedin
-      url: "https://www.linkedin.com/in/flemmingbakkensen/"
-    - title: fbakkensen at X
-      icon: x-twitter
-      url: "https://x.com/fbakkensen"
-    - title: fbakkensen at GitHub
-      icon: github
-      url: "https://github.com/FBakkensen"
+# Custom theme settings
+show_excerpts: true
+linkedin_url: "https://www.linkedin.com/in/flemmingbakkensen/"
+twitter_url: "https://x.com/fbakkensen"
+github_url: "https://github.com/FBakkensen"
+bluesky_url: "https://bsky.app/profile/fbakkensen.bsky.social"
+
+# Collections for tags (GitHub Pages compatible)
+collections:
+  tags:
+    output: true
+    permalink: /tags/:name/
+
+defaults:
+  - scope:
+      path: ""
+      type: tags
+    values:
+      layout: tag

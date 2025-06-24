@@ -33,7 +33,7 @@ While GitHub Copilot for VS Code already has a built-in `githubRepo` tool for re
 
 To enable both MCP servers, add the following configuration to your VS Code `settings.json`:
 
-````json
+```json
 {
     // ... other VS Code settings ...
     "mcp": {
@@ -49,7 +49,7 @@ To enable both MCP servers, add the following configuration to your VS Code `set
     }
     // ... more VS Code settings ...
 }
-````
+```
 
 ## The Secret Sauce: Business Central Base Code Access
 
@@ -76,11 +76,11 @@ Let me show you how powerful this setup is with a real example. I wanted to unde
 
 ### The Prompt
 
-````
+```md
 Search MS Doc and the github repo with all Business Central Base Code `fbakkensen\bc-w1`
 for information on how Item Tracking is implemented on the Sales Line.
 Add a Summary from the documentation, and concrete code examples from the repo
-````
+```
 
 ### The Magic Happens
 
@@ -129,7 +129,7 @@ Here's the actual response I received from GitHub Copilot - notice how it combin
 
 #### 1. Main Entry Point - SalesLineReserve.Codeunit.al
 
-````al
+```al
 procedure CallItemTracking(var SalesLine: Record "Sales Line")
 var
     TrackingSpecification: Record "Tracking Specification";
@@ -148,11 +148,11 @@ begin
         (SalesLine."Return Receipt No." <> ''))
     then
         ItemTrackingLines.SetRunMode(Enum::"Item Tracking Run Mode"::"Combined Ship/Rcpt");
-````
+```
 
 #### 2. Core UI Component - ItemTrackingLines.Page.al
 
-````al
+```al
 field("Serial No."; Rec."Serial No.")
 {
     ApplicationArea = ItemTracking;
@@ -169,22 +169,22 @@ field("Serial No."; Rec."Serial No.")
         ItemTrackingDataCollection.AssistEditTrackingNo(Rec,
             DoSearchForSupply((CurrentSignFactor * SourceQuantityArray[1] < 0) and not InsertIsBlocked),
             CurrentSignFactor, "Item Tracking Type"::"Serial No.", MaxQuantity);
-````
+```
 
 #### 3. Tracking Specification Record Structure
 
-````al
+```al
 local procedure InitFromSalesLine(var TrackingSpecification: Record "Tracking Specification"; SalesLine: Record "Sales Line")
 begin
     TrackingSpecification.InitTrackingSpecification(
         Database::"Sales Line", SalesLine."Document Type".AsInteger(), SalesLine."Document No.", '', 0, SalesLine."Line No.",
         SalesLine."Variant Code", SalesLine."Location Code", SalesLine."Qty. per Unit of Measure");
     TrackingSpecification.SetItemData(SalesLine."No.", SalesLine.Description, SalesLine."Location Code", SalesLine."Variant Code", SalesLine."Bin Code", SalesLine."Qty. per Unit of Measure");
-````
+```
 
 #### 4. Integration with Reservation System
 
-````al
+```al
 procedure UpdateItemTrackingAfterPosting(SalesHeader: Record "Sales Header")
 var
     ReservationEntry: Record "Reservation Entry";
@@ -195,11 +195,11 @@ begin
     ReservationEntry.SetSourceFilter('', 0);
     CreateReservEntry.UpdateItemTrackingAfterPosting(ReservationEntry);
 end;
-````
+```
 
 #### 5. Special Scenarios - Drop Shipments
 
-````al
+```al
 if SalesLine."Drop Shipment" then begin
     ItemTrackingLines.SetRunMode(Enum::"Item Tracking Run Mode"::"Drop Shipment");
     if SalesLine."Purchase Order No." <> '' then
@@ -207,17 +207,17 @@ if SalesLine."Drop Shipment" then begin
             Database::"Purchase Line",
             1, SalesLine."Purchase Order No.", '', 0, SalesLine."Purch. Order Line No."));
 end;
-````
+```
 
 #### 6. Warehouse Integration Check
 
-````al
+```al
 if ItemTrackingMgt.ItemTrkgIsManagedByWhse(
      Rec."Source Type", Rec."Source Subtype", Rec."Source ID",
      Rec."Source Prod. Order Line", Rec."Source Ref. No.", Rec."Location Code", Rec."Item No.")
 then
     exit;
-````
+```
 
 This comprehensive output shows me exactly how Microsoft implements features, which patterns they use, and how different components interact. I get to see:
 - Event-driven architecture with the `OnBeforeCallItemTracking` event

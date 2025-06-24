@@ -69,7 +69,7 @@ Let's explore five proven techniques you can start using today, ranging from beg
 This is the most basic form of meta prompting—asking the AI to improve your existing prompt.
 
 **Example:**
-```
+```md
 "I want to write this prompt better: 'Help me set up approvals in Business Central.'
 How would you improve this prompt to get more specific and useful instructions?"
 ```
@@ -80,7 +80,7 @@ How would you improve this prompt to get more specific and useful instructions?"
 Here, you ask the AI to analyze why a prompt might not be working well.
 
 **Example:**
-```
+```md
 "I used this prompt but didn't get helpful results: 'Create a data migration plan.'
 What's missing from this prompt, and how could I make it more effective?"
 ```
@@ -91,7 +91,7 @@ What's missing from this prompt, and how could I make it more effective?"
 Instead of refining an existing prompt, you describe what you're trying to achieve and ask the AI to create a prompt from scratch.
 
 **Example:**
-```
+```md
 "I need to create a prompt that will help me generate comprehensive test scenarios for a new
 Business Central sales order processing workflow. What would be an effective prompt for this purpose?"
 ```
@@ -102,7 +102,7 @@ Business Central sales order processing workflow. What would be an effective pro
 This involves asking the AI to create a prompt as if it were coming from an expert in a specific domain.
 
 **Example:**
-```
+```md
 "How would an experienced Business Central implementation consultant phrase a prompt to get
 detailed advice on handling multi-currency transactions across subsidiaries?"
 ```
@@ -115,17 +115,17 @@ Chain prompting uses the output of one meta prompt as input for another, creatin
 **Business Central Example - Requirements Gathering Chain:**
 
 **Step 1:** Create initial requirements prompt
-```
+```md
 "Create a prompt for gathering Business Central financial reporting requirements from a manufacturing client."
 ```
 
 **Step 2:** Enhance with industry specifics
-```
+```md
 "Take this requirements prompt: [Step 1 output] and enhance it specifically for automotive manufacturing companies with complex cost accounting needs."
 ```
 
 **Step 3:** Add implementation guidance
-```
+```md
 "Now add implementation complexity assessment and timeline estimation guidance to this automotive manufacturing requirements prompt: [Step 2 output]"
 ```
 
@@ -172,7 +172,7 @@ This is too vague to implement effectively. Let's use meta prompting to help ref
 
 **Step 1: Ask the AI to help you create a prompt for requirement clarification**
 
-```
+```md
 "I'm a Business Central consultant and received this vague requirement from a client:
 'We need better inventory tracking in Business Central.'
 
@@ -184,7 +184,7 @@ that will help me understand their specific needs, pain points, and desired outc
 
 The AI might suggest a prompt like:
 
-```
+```md
 "Act as an experienced Business Central inventory management specialist. A manufacturing
 client has stated they 'need better inventory tracking in Business Central.'
 
@@ -239,7 +239,7 @@ Before diving into meta prompting, define what you want to achieve:
 - **Consider your audience**: Who will use the output (you, your team, the client)?
 
 **Example Framework:**
-```
+```md
 "I need to create a prompt that will help me [specific task] for [target audience]
 that achieves [specific outcome] while considering [key constraints/requirements]."
 ```
@@ -315,20 +315,20 @@ Instead of asking for general improvements, target specific aspects:
 ### 🚀 Advanced Meta Prompting Techniques
 
 **Chain Prompting**: Use the output of one meta prompt as input for another
-```
+```md
 Step 1: "Create a prompt for gathering Business Central requirements"
 Step 2: "Now improve that prompt specifically for manufacturing clients"
 Step 3: "Add error handling guidance to that manufacturing requirements prompt"
 ```
 
 **Role-Based Meta Prompting**: Ask the AI to adopt specific expert personas
-```
+```md
 "How would a Business Central technical architect phrase a prompt to get
 detailed integration recommendations between BC and external systems?"
 ```
 
 **Constraint-Based Refinement**: Add specific limitations to focus the output
-```
+```md
 "Refine this prompt to generate responses that are:
 - Under 500 words
 - Include specific BC menu paths

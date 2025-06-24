@@ -1,0 +1,15 @@
+---
+layout: base
+---
+<article class="page">
+  <header class="page-header">
+    <div class="terminal-prompt">
+      <span class="prompt">PS C:\ALProjects\BCBlog&gt;</span> Get-Content .\{{ page.title | slugify }}.md
+    </div>
+    <h1 class="page-title">{{ page.title | escape }}</h1>
+  </header>
+
+  <div class="page-content">
+    {{ content }}
+  </div>
+</article>
