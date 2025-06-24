@@ -85,9 +85,13 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // Helper function to escape HTML while preserving line breaks
   function escapeHtml(text) {
-    const div = document.createElement('div');
-    div.textContent = text;
-    return div.innerHTML.replace(/\n/g, '\n'); // Preserve newlines
+    return text
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#039;');
+    // Don't replace newlines - let them remain as-is
   }
 
   // Helper function to apply syntax highlighting

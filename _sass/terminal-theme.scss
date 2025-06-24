@@ -31,6 +31,13 @@ $line-height-base: 1.8;
   box-sizing: border-box;
 }
 
+// Force all code blocks to preserve formatting
+pre, pre code {
+  white-space: pre !important;
+  word-wrap: normal !important;
+  word-break: normal !important;
+}
+
 body {
   margin: 0;
   padding: 0;
@@ -933,6 +940,17 @@ a {
 // Syntax Highlighting (Rouge)
 .highlight {
   background-color: $ps-header-bg;
+  
+  pre {
+    white-space: pre !important;
+    word-wrap: normal !important;
+    overflow-x: auto !important;
+    
+    code {
+      white-space: pre !important;
+      word-wrap: normal !important;
+    }
+  }
   
   .c { color: $ps-darkgray; } // Comment
   .k { color: $ps-cyan; } // Keyword
