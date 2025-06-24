@@ -83,11 +83,11 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   };
 
-  // Helper function to escape HTML
+  // Helper function to escape HTML while preserving line breaks
   function escapeHtml(text) {
     const div = document.createElement('div');
     div.textContent = text;
-    return div.innerHTML;
+    return div.innerHTML.replace(/\n/g, '\n'); // Preserve newlines
   }
 
   // Helper function to apply syntax highlighting
@@ -125,10 +125,12 @@ document.addEventListener('DOMContentLoaded', function() {
       });
     });
 
-    // Escape any remaining unprocessed code
-    processedCode = processedCode.replace(/(?!__HIGHLIGHT_\d+__)[^_]+|_(?!_HIGHLIGHT_)|__(?!HIGHLIGHT_)/g, (match) => {
-      return escapeHtml(match);
-    });
+    // Escape any remaining unprocessed code while preserving structure
+    processedCode = processedCode.split('\n').map(line => {
+      return line.replace(/(?!__HIGHLIGHT_\d+__)[^_]+|_(?!_HIGHLIGHT_)|__(?!HIGHLIGHT_)/g, (match) => {
+        return escapeHtml(match);
+      });
+    }).join('\n');
 
     // Replace all placeholders with their highlighted versions
     placeholders.forEach((value, key) => {

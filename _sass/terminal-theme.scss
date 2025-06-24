@@ -767,12 +767,16 @@ a {
     overflow-x: auto;
     position: relative;
     margin: 24px 0;
+    white-space: pre;
     
     code {
       background: none;
       padding: 16px;
       font-size: 14px;
       display: block;
+      white-space: pre;
+      word-wrap: normal;
+      overflow-x: auto;
     }
   }
   
@@ -1003,6 +1007,7 @@ a {
     background-color: transparent;
     overflow-x: auto;
     overflow-y: hidden;
+    white-space: pre;
     
     code {
       @include code-font;
@@ -1011,6 +1016,9 @@ a {
       background-color: transparent !important;
       color: #d4d4d4 !important;
       line-height: 1.5;
+      white-space: pre;
+      word-wrap: normal;
+      overflow-x: auto;
     }
   }
 }
