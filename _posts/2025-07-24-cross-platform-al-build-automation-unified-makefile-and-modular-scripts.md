@@ -18,6 +18,30 @@ By enabling GitHub Copilot to compile code and run analyzers through terminal co
 
 GitHub Copilot doesn't have access to VS Code's built-in functions and requires terminal access to compile applications using `alc.exe`. A prominent challenge with using `alc.exe` is that it's typically not in the system PATH, since the AL compiler is installed as part of the VS Code extension and updates with the extension. Our scripts automatically detect the most recent version of the AL compiler installed.
 
+## Guiding GitHub Copilot with Instructions
+
+A crucial component of this build system is the `.github/copilot-instructions.md` file in the ALMakeDemo repository. This file provides explicit guidance to GitHub Copilot on how to work with the project and establishes critical build quality requirements.
+
+The most important instruction is the **strict build quality requirement**:
+
+```markdown
+VERY IMPORTANT: Build Quality Requirement
+The build must run without any warnings and errors.
+This is a strict requirement for all code changes and build processes.
+Any warning or error in the build output is considered a failure and must be resolved before proceeding.
+```
+
+The instructions file also provides GitHub Copilot with:
+- Build workflow guidance using `make build`, `make clean`, etc.
+- Quick reference for essential commands
+- Information about external dependencies (VS Code AL extension)
+
+This approach ensures that when GitHub Copilot generates or modifies AL code, it knows to:
+1. Use `make build` to compile and validate the code
+2. Only return code to the user when the build completes without warnings or errors
+
+By establishing these guidelines upfront, GitHub Copilot becomes more effective at generating production-ready code that adheres to quality standards.
+
 ## Understanding Make
 
 Make is a build automation tool created in the 1970s for Unix systems. For Business Central developers accustomed to VS Code's graphical interface, make provides a command-line approach to build automation.
