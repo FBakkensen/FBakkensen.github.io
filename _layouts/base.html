@@ -58,5 +58,38 @@
       </footer>
     </div>
     <script src="{{ "/assets/js/code-blocks.js" | relative_url }}?v={{ site.time | date: '%s' }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+    <script>
+      mermaid.initialize({
+        startOnLoad: true,
+        theme: 'base',
+        themeVariables: {
+          background: 'transparent',
+          primaryColor: '#003d82',
+          primaryTextColor: '#d4d4d4',
+          primaryBorderColor: '#0066cc',
+          lineColor: '#c0c0c0',
+          secondaryColor: '#003d82',
+          tertiaryColor: '#003d82',
+          textColor: '#d4d4d4',
+          nodeTextColor: '#d4d4d4',
+          defaultLinkColor: '#c0c0c0',
+          clusterBkg: '#003d82',
+          clusterBorder: '#0066cc',
+          mainBkg: '#003d82',
+          actorBkg: '#003d82',
+          actorBorder: '#0066cc',
+          actorTextColor: '#d4d4d4',
+          labelBoxBkgColor: '#003d82',
+          labelBoxBorderColor: '#0066cc',
+          pie1: '#00ffff',
+          pie2: '#ffff00',
+          pie3: '#00ff00',
+          pie4: '#ff00ff',
+          pie5: '#ff0000',
+          fontFamily: 'Cascadia Code, Consolas, Monaco, Courier New, monospace',
+        }
+      });
+    </script>
   </body>
 </html>
