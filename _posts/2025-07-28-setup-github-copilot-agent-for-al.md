@@ -1,9 +1,11 @@
 ---
-title: "Setup Github Copilot     class A,C,D,F,G,H,I,J,K,L action
-    class B,E milestone class A,C,D,F,G,H,I,J,K,L action
-    class B,E milestonegent For AL"
+layout: post
+title: "Setup Github Copilot Agent For AL"
 date: 2025-07-28
-tags: [Copilot, AL, Automation, GitHub Actions]
+categories: [Copilot, AL, Automation, GitHub Actions]
+author: Flemming Bakkensen
+description: "Learn how to set up a custom development environment for the GitHub Copilot agent to compile and analyze Business Central AL projects."
+tags: [copilot, al, automation, github actions]
 ---
 
 ## Introduction
