@@ -16,29 +16,6 @@ However, for this to work seamlessly, especially in a specialized environment li
 
 This is precisely the problem this guide solves. We will walk through how to create a custom development environment for the GitHub Copilot agent, enabling it to compile and analyze your AL projects. This setup is the crucial bridge that allows the Copilot agent to understand your codebase, solve your issues, and supercharge your development workflow. This is why we need to make the Copilot able to compile and run analyzers for AL projects.
 
-Here's a high-level overview of the process:
-
-<pre class="mermaid">
-graph TD
-    A[GitHub Issue Created] --> B{Copilot Agent Activated};
-    B --> C[Setup Dev Environment];
-    C --> D[Run `copilot-setup-steps.yml`];
-    D --> E{Linux Runner};
-    E --> F[Install .NET & Dependencies];
-    F --> G[Install AL Compiler];
-    G --> H[Restore BC Symbols];
-    H --> I{Environment Ready};
-    I --> J[Copilot develops code];
-    J --> K[Copilot creates Pull Request];
-    K --> L[Developer Review];
-
-    classDef action fill:#00ffff,stroke:#00ffff,color:#000
-    classDef milestone fill:#ffff00,stroke:#ffff00,color:#000
-
-    class A,C,D,F,G,H,J,K,L action
-    class B,E,I milestone
-</pre>
-
 ## Why Customize the Copilot Agent Environment?
 
 - Preinstall tools and dependencies for AL projects
