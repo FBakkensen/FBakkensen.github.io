@@ -18,8 +18,15 @@ This is precisely the problem this guide solves. We will walk through how to cre
 
 ## Why Customize the Copilot Agent Environment?
 
-- Preinstall tools and dependencies for AL projects
-- Set environment variables for authentication and configuration
+The GitHub Copilot agent operates within a standardized, generic Linux environment. While this is suitable for many common programming languages, AL development for Business Central has a unique set of requirements that are not met out-of-the-box. Customizing the environment is not just a convenience—it's a necessity to empower the agent to work with your AL project. Here’s why:
+
+- **Specialized Compiler:** The AL language compiler (`alc.exe`) is not a standard component of any operating system. It is distributed as part of the "AL Language" Visual Studio Code extension. To compile your project, the agent's environment must first download this extension and extract the compiler.
+
+- **Complex Dependency Model (Symbols):** AL projects rely on symbol files (`.app`) for dependencies, including the Microsoft base and system applications, as well as any third-party extensions. These symbols must be downloaded from a specific NuGet feed (`AppSourceSymbols`). The agent needs a setup that can parse your project's `app.json` file and fetch all the correct symbol versions.
+
+- **Cross-Platform Build Tooling:** To ensure that build commands are consistent between a developer's machine (often Windows) and the agent's Linux environment, we use a `Makefile`. However, the tools invoked by the `Makefile`—such as the .NET SDK, Mono (to run .NET Framework applications on Linux), and the NuGet CLI—must be pre-installed in the agent's environment.
+
+- **Enabling True Automation:** The ultimate goal is to have the Copilot agent autonomously understand, modify, and validate code. Without a customized environment, the agent would fail at the very first step: compiling the project. By pre-installing all necessary tools and dependencies, we create a "pre-warmed" environment where the agent can immediately get to work on solving the actual GitHub issue.
 
 ## Official Documentation
 
