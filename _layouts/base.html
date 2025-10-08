@@ -22,6 +22,11 @@
           <div class="terminal-title">
             <a href="{{ "/" | relative_url }}" class="logo-link">BC Development</a>
           </div>
+          <button class="hamburger-menu" aria-label="Toggle navigation menu" aria-expanded="false">
+            <span class="hamburger-line"></span>
+            <span class="hamburger-line"></span>
+            <span class="hamburger-line"></span>
+          </button>
           <nav class="terminal-nav">
             <a href="{{ "/" | relative_url }}" class="nav-link">Blog</a>
             <a href="{{ "/tags/" | relative_url }}" class="nav-link">Tags</a>
@@ -54,10 +59,12 @@
         </div>
       </footer>
     </div>
-    <script src="{{ "/assets/js/code-blocks.js" | relative_url }}?v={{ site.time | date: '%s' }}"></script>
-    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+    <script src="{{ "/assets/js/mobile-nav.js" | relative_url }}?v={{ site.time | date: '%s' }}"></script>
+    <script defer src="{{ "/assets/js/code-blocks.js" | relative_url }}?v={{ site.time | date: '%s' }}"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js" onload="initMermaid()"></script>
     <script>
-      mermaid.initialize({
+      function initMermaid() {
+        mermaid.initialize({
         startOnLoad: true,
         theme: 'base',
         themeVariables: {
@@ -86,7 +93,8 @@
           pie5: '#ff0000',
           fontFamily: 'Cascadia Code, Consolas, Monaco, Courier New, monospace',
         }
-      });
+        });
+      }
     </script>
   </body>
 </html>
