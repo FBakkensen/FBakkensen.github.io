@@ -277,7 +277,6 @@ PLATFORMS
 DEPENDENCIES
   github-pages
   jekyll-paginate
-  jekyll-remote-theme
 
 BUNDLED WITH
    2.6.7

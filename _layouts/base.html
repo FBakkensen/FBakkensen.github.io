@@ -19,20 +19,17 @@
     <div class="terminal-container">
       <header class="terminal-header">
         <div class="terminal-bar">
-          <div class="terminal-buttons">
-            <span class="terminal-button minimize"></span>
-            <span class="terminal-button maximize"></span>
-            <span class="terminal-button close"></span>
+          <div class="terminal-title">
+            <a href="{{ "/" | relative_url }}" class="logo-link">BC Development</a>
           </div>
-          <div class="terminal-title">Windows PowerShell - Business Central Development Blog</div>
-        </div>
-        <div class="terminal-nav">
-          <a href="{{ "/" | relative_url }}" class="nav-link">C:\ALProjects\Blog</a>
-          <a href="{{ "/tags/" | relative_url }}" class="nav-link">C:\ALProjects\Tags</a>
-          <a href="{{ "/about" | relative_url }}" class="nav-link">C:\ALProjects\About</a>
-          <a href="{{ site.linkedin_url }}" class="nav-link linkedin-button" target="_blank" rel="noopener noreferrer">
-            <span class="prompt">PS&gt;</span> Connect-BCCommunity -Platform LinkedIn
-          </a>
+          <nav class="terminal-nav">
+            <a href="{{ "/" | relative_url }}" class="nav-link">Blog</a>
+            <a href="{{ "/tags/" | relative_url }}" class="nav-link">Tags</a>
+            <a href="{{ "/about" | relative_url }}" class="nav-link">About</a>
+            <a href="{{ site.linkedin_url }}" class="nav-link linkedin-button" target="_blank" rel="noopener noreferrer">
+              <span class="prompt">PS&gt;</span> Connect
+            </a>
+          </nav>
         </div>
       </header>
 

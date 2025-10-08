@@ -9,15 +9,6 @@ layout: base
       </h1>
     {%- endif -%}
 
-    <div class="welcome-message">
-      {{ content }}
-    </div>
-
-    <div class="section-divider">
-      <span class="prompt">PS C:\ALProjects\BCBlog&gt;</span> Write-Host ("-" * 80) -ForegroundColor DarkGray
-      <div class="divider-line"></div>
-    </div>
-
     {% if site.paginate %}
       {% assign posts = paginator.posts %}
     {% else %}
@@ -39,13 +30,13 @@ layout: base
             <h2 class="post-title">
               <a href="{{ post.url | relative_url }}">{{ post.title | escape }}</a>
             </h2>
-            
+
             {%- if site.show_excerpts -%}
               <div class="post-excerpt">
                 {{ post.excerpt | strip_html | truncatewords: 40 }}
               </div>
             {%- endif -%}
-            
+
             <div class="post-footer">
               <a href="{{ post.url | relative_url }}" class="read-more-link">
                 <span class="prompt">PS&gt;</span> Read-Post -FullContent
@@ -65,11 +56,11 @@ layout: base
           {%- else %}
             <span class="pagination-link disabled"><span class="prompt">&lt;</span> prev</span>
           {%- endif %}
-          
+
           <span class="page-number">
             Page {{ paginator.page }} of {{ paginator.total_pages }}
           </span>
-          
+
           {%- if paginator.next_page %}
             <a href="{{ paginator.next_page_path | relative_url }}" class="pagination-link next">
               next <span class="prompt">&gt;</span>
@@ -84,27 +75,13 @@ layout: base
 
   <aside class="sidebar">
     <div class="sidebar-section">
-      <h3><span class="prompt">PS&gt;</span> Get-BlogTags</h3>
-      <div class="tag-cloud">
-        {% assign tags = site.tags | sort %}
-        {% for tag in tags %}
-          <a href="/tags/#{{ tag[0] | slugify }}" class="tag-link">
-            <span class="tag-name">{{ tag[0] }}</span>
-            <span class="tag-count">({{ tag[1].size }})</span>
-          </a>
-        {% endfor %}
-      </div>
-    </div>
-
-    <div class="sidebar-section">
       <h3><span class="prompt">PS&gt;</span> whoami</h3>
       <div class="about-widget">
         <p class="whoami-output">BCDEV\{{ site.author.name | replace: " ", "." | downcase }}</p>
-        <p>{{ site.description }}</p>
-        <a href="{{ site.linkedin_url }}" class="linkedin-cta" target="_blank" rel="noopener noreferrer">
-          <span class="prompt">PS&gt;</span> Connect-BCCommunity
-        </a>
         <div class="social-links">
+          <a href="{{ site.linkedin_url }}" target="_blank" rel="noopener noreferrer" title="LinkedIn">
+            <span class="prompt">PS&gt;</span> Invoke-WebRequest linkedin.com/in/flemmingbakkensen
+          </a>
           <a href="{{ site.github_url }}" target="_blank" rel="noopener noreferrer" title="GitHub">
             <span class="prompt">PS&gt;</span> git remote -v
           </a>
