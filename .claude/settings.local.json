@@ -7,8 +7,8 @@
     ],
     "deny": []
   },
-  "outputStyle": "default",
   "enabledMcpjsonServers": [
     "chrome-devtools"
-  ]
+  ],
+  "outputStyle": "linkedin-post-generator"
 }
