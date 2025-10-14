@@ -7,5 +7,8 @@
     ],
     "deny": []
   },
-  "outputStyle": "technical-blog-writer"
+  "outputStyle": "default",
+  "enabledMcpjsonServers": [
+    "chrome-devtools"
+  ]
 }
