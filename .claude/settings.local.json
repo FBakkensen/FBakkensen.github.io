@@ -6,5 +6,6 @@
       "Bash(bundle exec:*)"
     ],
     "deny": []
-  }
+  },
+  "outputStyle": "technical-blog-writer"
 }
