@@ -1070,6 +1070,12 @@ a {
       text-align: left;
       vertical-align: top;
       line-height: 1.6;
+
+      &:first-child {
+        min-width: 180px;
+        font-weight: 600;
+        color: $ps-cyan;
+      }
     }
 
     th {
