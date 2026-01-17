@@ -12,7 +12,7 @@ tags: [ai, gaming, productivity, career-development]
 
 ## 🎯 Introduction
 
-For decades, gaming was often dismissed as a distraction—a "time sink" that pulled developers away from more "productive" pursuits. But as we transition into the **Agentic Era** of software development, where we no longer just write lines of code but orchestrate teams of AI assistants, the script has flipped.
+For decades, gaming was often dismissed as a distraction - a "time sink" that pulled developers away from more "productive" pursuits. But as we transition into the **Agentic Era** of software development, where we no longer just write lines of code but orchestrate teams of AI assistants, the script has flipped.
 
 If you grew up managing resource chains in *Factorio*, micro-managing units in *StarCraft*, or optimizing party builds in an RPG, you’ve been training for the future of engineering without even realizing it. In this post, we’ll explore why the "Gamer Mindset" is becoming a primary competitive advantage for modern developers.
 
@@ -71,11 +71,11 @@ In an RPG, you don't control every sword swing of your companions; you set their
 
 In gaming, failure is data. A "Game Over" screen isn't a rejection; it's a prompt to try a different build or strategy.
 
-AI development is inherently probabilistic. Your first prompt might fail. The second might hallucinate. A gamer-developer treats this like a boss fight. You analyze the patterns, adjust your prompt (your "gear"), and go again. This resilience—this lack of "ego" toward broken code—makes gamers significantly faster at adopting AI tools.
+AI development is inherently probabilistic. Your first prompt might fail. The second might hallucinate. A gamer-developer treats this like a boss fight. You analyze the patterns, adjust your prompt (your "gear"), and go again. This resilience - this lack of "ego" toward broken code - makes gamers significantly faster at adopting AI tools.
 
 ## 🚀 Conclusion
 
-The gap between "playing" and "working" is shrinking. The skills required to manage a 40-man raid in *World of Warcraft*—communication, resource management, and strategic alignment—are eerily similar to managing an enterprise-scale AI-assisted development project.
+The gap between "playing" and "working" is shrinking. The skills required to manage a 40-man raid in *World of Warcraft* - communication, resource management, and strategic alignment - are eerily similar to managing an enterprise-scale AI-assisted development project.
 
 If you’ve been worried that your gaming hobby was "wasted time," it’s time to update your internal manifest. You weren't wasting time; you were practicing for the final level of software engineering.
 
