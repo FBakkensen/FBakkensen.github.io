@@ -259,4 +259,4 @@ For the BC community specifically, I see this as an opportunity to build shared 
 
 <span class="prompt">PS C:\DevProjects\DevBlog&gt;</span> Install-Plugin -Source "community/shared-marketplace" -Channel stable
 
-*What skills or tools would you package first for your team? Let's discuss on [LinkedIn](https://www.linkedin.com/in/flemming-bakkensen/) or [Bluesky](https://bsky.app/profile/fbakkensen.bsky.social)!*
+*What skills or tools would you package first for your team? Let's discuss on [LinkedIn](https://www.linkedin.com/in/flemming-bakkensen/) or [X](https://x.com/FBakkensen)!*
