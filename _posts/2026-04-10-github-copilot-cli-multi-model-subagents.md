@@ -16,7 +16,7 @@ GitHub Copilot CLI introduced a compelling answer: **run multiple models in para
 
 ## 🤖 The Problem: Every Model Has Blind Spots
 
-Let me be direct: there is no perfect AI model. GPT-5.4, Claude Opus, and every other sophisticated model excel at different aspects of problem-solving. More importantly, they fail differently. They have different training biases, different reasoning patterns, different edge cases they overlook.
+Let me be direct: there is a broad consensus that GPT-5.4 and Claude Opus 4.6 are both very strong models. But even the strongest models still have blind spots, and they fail differently. They have different training biases, different reasoning patterns, and different edge cases they overlook.
 
 When you ask a single model to review your code, you're getting one lens. That lens might miss what another lens would immediately catch. It's not that one model is "better"—it's that different models will catch different things.
 
@@ -31,9 +31,12 @@ This is exactly what Copilot CLI's subagent architecture enables.
 Imagine you want a comprehensive code review. Instead of running a single model and getting one perspective, you can do this:
 
 ```bash
-/review pr #309 using gpt 5.4 and opus 4.6
+/review pr #309 using gpt 5.4 and claude opus 4.6 in parallel
 ```
 
+The screenshot below shows the two review agents running in parallel and waiting for the consolidated result:
+
+![Copilot CLI spawning GPT-5.4 and Claude Opus 4.6 review agents in parallel](/assets/images/2026-04-10-github-copilot-cli-multi-model-subagents/pr-309-gpt-opus-parallel.png)
 Here's what happens:
 
 1. **Parallel Execution**: Copilot CLI spawns two independent subagents simultaneously. One uses GPT-5.4, the other uses Claude Opus 4.6.
@@ -41,6 +44,12 @@ Here's what happens:
 3. **Consolidation**: The primary Copilot CLI agent synthesizes the findings. It identifies overlapping concerns (high confidence issues both models flagged), unique insights from each model, and presents a unified review that's richer than either model running alone.
 
 The magic isn't that you're getting two reviews to read separately. It's that Copilot CLI intelligently merges them—surfacing what each model caught that the other might have missed, while eliminating redundancy.
+
+And this is not limited to two models. I also built an [al-code-review skill](https://github.com/FBakkensen/bc-agentic-dev-tools-marketplace/blob/master/plugins/al-code-review/skills/al-code-review/SKILL.md) that asks for three review angles—Performance, Bug Hunter, and Code Reuse. A prompt like `review pr #309 using gpt 5.4, opus 4.6 and sonnet 4.6 with the al-code-review skill` can fan out into **9 subagents**: 3 models × 3 review angles. That is where Copilot CLI gets especially interesting: you can stack model diversity and review diversity at the same time.
+
+The screenshot below shows all nine subagents running in parallel across the three models and three review angles:
+
+![All 9 review subagents running in parallel for PR 309](/assets/images/2026-04-10-github-copilot-cli-multi-model-subagents/pr-309-9-subagents.png)
 
 ### Why This Matters
 
