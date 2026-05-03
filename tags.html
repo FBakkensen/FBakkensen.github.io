@@ -5,18 +5,30 @@ permalink: /tags/
 ---
 
 <div class="tags-page">
-  <div class="terminal-prompt">
-    <span class="prompt">PS C:\ALProjects\BCBlog&gt;</span> Get-Tags | Group-Object -Property Name | Sort-Object Count -Descending
+  <div class="pp-breadcrumb" style="max-width: none; margin: 0 0 24px;">
+    <span class="tp-cmd-path">PS C:\ALProjects\BCBlog&gt;</span>
+    <span class="tp-cmd-verb">Get-Tags</span>
+    <span class="tp-cmd-pipe">|</span>
+    <span class="tp-cmd-verb">Group-Object</span>
+    <span class="tp-cmd-flag">-Property</span>
+    <span class="tp-cmd-string">Name</span>
+    <span class="tp-cmd-pipe">|</span>
+    <span class="tp-cmd-verb">Sort-Object</span>
+    <span class="tp-cmd-flag">Count</span>
+    <span class="tp-cmd-flag">-Descending</span>
   </div>
-  
+
   <div id="tag-cloud" class="tag-cloud-page">
     <!-- Tags will be populated by JavaScript -->
   </div>
-  
-  <div class="terminal-prompt" style="margin-top: 32px;">
-    <span class="prompt">PS C:\ALProjects\BCBlog&gt;</span> Get-BlogPosts -Tag "<span id="selected-tag">all</span>"
+
+  <div class="pp-breadcrumb" style="max-width: none; margin: 24px 0;">
+    <span class="tp-cmd-path">PS C:\ALProjects\BCBlog&gt;</span>
+    <span class="tp-cmd-verb">Get-BlogPosts</span>
+    <span class="tp-cmd-flag">-Tag</span>
+    <span class="tp-cmd-string">"<span id="selected-tag">all</span>"</span>
   </div>
-  
+
   <div id="tag-posts" class="tag-posts">
     <!-- Posts will be populated by JavaScript -->
   </div>
@@ -68,11 +80,11 @@ showAllPosts();
 // Function to show posts for a specific tag
 function showPostsForTag(tag) {
   document.getElementById('selected-tag').textContent = tag;
-  const filteredPosts = posts.filter(post => 
+  const filteredPosts = posts.filter(post =>
     post.tags && post.tags.includes(tag)
   );
   displayPosts(filteredPosts);
-  
+
   // Update active tag
   document.querySelectorAll('.tag-link').forEach(link => {
     link.classList.remove('active');
@@ -92,7 +104,7 @@ function showAllPosts() {
 function displayPosts(postsToShow) {
   const container = document.getElementById('tag-posts');
   container.innerHTML = '';
-  
+
   postsToShow.forEach(post => {
     const postEl = document.createElement('article');
     postEl.className = 'post-preview';
@@ -107,17 +119,10 @@ function displayPosts(postsToShow) {
         ${post.excerpt}
       </div>
       <a href="${post.url}" class="read-more">
-        <span class="prompt">PS&gt;</span> Get-Content .\\posts\\${post.title.toLowerCase().replace(/[^a-z0-9]/g, '-').substring(0, 20)}.md
+        <span class="prompt">PS&gt;</span> Read-Post -FullContent →
       </a>
     `;
     container.appendChild(postEl);
-    
-    // Add separator
-    if (postsToShow.indexOf(post) < postsToShow.length - 1) {
-      const separator = document.createElement('div');
-      separator.className = 'post-separator';
-      container.appendChild(separator);
-    }
   });
 }
 
@@ -139,22 +144,3 @@ if (window.location.hash) {
   }
 }
 </script>
-
-<style>
-.tag-cloud-page {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-  margin: 24px 0;
-}
-
-.tag-link.active {
-  background-color: {{ site.ps-cyan | default: '#00ffff' }};
-  color: {{ site.ps-bg | default: '#012456' }};
-  border-color: {{ site.ps-cyan | default: '#00ffff' }};
-}
-
-.tag-posts {
-  margin-top: 24px;
-}
-</style>

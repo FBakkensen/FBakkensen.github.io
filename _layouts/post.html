@@ -1,76 +1,137 @@
 ---
 layout: base
 ---
-<article class="post">
-  <header class="post-header">
-    <div class="terminal-prompt">
-      <span class="prompt">PS C:\ALProjects\BCBlog\posts&gt;</span> Get-Content .\{{ page.title | slugify }}.md
-    </div>
-    <h1 class="post-title">{{ page.title | escape }}</h1>
-    <div class="post-meta">
-      <span class="prompt">PS&gt;</span> # Posted: 
-      <time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%b %-d, %Y" }}</time>
-      {%- if page.author -%}
-        <span class="meta-separator">•</span>
-        <span>{{ page.author }}</span>
-      {%- endif -%}
-      {%- if page.categories.size > 0 -%}
-        <span class="meta-separator">•</span>
-        <span class="categories">
-          {%- for category in page.categories -%}
-            <span class="category">{{ category }}</span>
-            {%- unless forloop.last -%}, {% endunless -%}
-          {%- endfor -%}
+<div class="pp-breadcrumb">
+  <span class="tp-cmd-path">PS C:\ALProjects\BCBlog&gt;</span>
+  <span class="tp-cmd-verb">Set-Location</span>
+  <span class="tp-cmd-flag">-Path</span>
+  <span class="tp-cmd-string">.{{ page.url }}</span>
+</div>
+
+<article class="pp-article">
+  <header class="pp-header">
+    <div class="pp-meta">
+      <span class="pp-date">▣ {{ page.date | date: '%Y-%m-%d' }}</span>
+      <span class="pp-runtime">~{% assign words = content | number_of_words %}{{ words | divided_by: 220 | at_least: 1 }} min runtime</span>
+      {% if page.tags.size > 0 %}
+        <span class="pp-tags">
+          {% for tag in page.tags %}
+            <a href="{{ '/tags/' | relative_url }}#{{ tag | slugify }}" class="tp-tag"><span class="tp-tag-flag">-Tag</span>{{ tag | replace: ' ', '' }}</a>
+          {% endfor %}
         </span>
-      {%- endif -%}
-      {%- if page.tags.size > 0 -%}
-        <div class="post-tags">
-          <span class="prompt">PS&gt;</span> # Tags: 
-          {%- for tag in page.tags -%}
-            <a href="/tags/#{{ tag | slugify }}" class="tag">{{ tag }}</a>
-            {%- unless forloop.last -%}, {% endunless -%}
-          {%- endfor -%}
-        </div>
-      {%- endif -%}
+      {% endif %}
+    </div>
+
+    <h1 class="pp-title">{{ page.title | escape }}</h1>
+
+    {% if page.description %}
+      <p class="pp-deck">{{ page.description }}</p>
+    {% endif %}
+
+    <div class="pp-author">
+      <div class="pp-avatar">FB</div>
+      <div class="pp-author-info">
+        <div class="pp-author-name">{{ site.author.name }}</div>
+        <div class="pp-author-role">{{ site.author.role | default: 'Lead Developer' }} · BCDEV\{{ site.author.name | replace: ' ', '.' }}</div>
+      </div>
+      <div class="pp-author-actions">
+        <a href="{{ '/' | relative_url }}" class="pp-author-link">PS&gt; Get-AuthorPosts</a>
+      </div>
     </div>
   </header>
 
-  <div class="post-content">
-    {% assign content_parts = content | split: '<!--more-->' %}
-    {% if content_parts.size > 1 %}
-      <!-- Show excerpt part -->
-      {{ content_parts[0] }}
-      
-      <!-- Insert TOC after excerpt -->
+  <div class="pp-grid">
+    <aside class="pp-toc">
       {% if page.toc != false %}
-        <div class="post-toc">
-          <div class="toc-header">
-            <span class="prompt">PS&gt;</span> Get-BlogPostStructure -TableOfContents
+        <div class="tp-pane">
+          <div class="tp-pane-header">
+            <span class="tp-pane-dot"></span>
+            <span class="tp-pane-title">Get-PostOutline</span>
           </div>
-          <div class="toc-content">
-            {% include toc.html html=content h_min=2 h_max=2 %}
+          <div class="tp-pane-body pp-toc-body">
+            {% include toc.html html=content h_min=2 h_max=2 sanitize=true %}
           </div>
         </div>
       {% endif %}
-      
-      <!-- Show rest of content -->
-      {{ content_parts[1] }}
-    {% else %}
-      <!-- No more tag, show full content -->
+
+      <div class="tp-pane">
+        <div class="tp-pane-header">
+          <span class="tp-pane-dot tp-pane-dot-warn"></span>
+          <span class="tp-pane-title">Read-Progress</span>
+        </div>
+        <div class="tp-pane-body">
+          <div class="pp-progress">
+            <div class="pp-progress-track"><div class="pp-progress-fill" id="pp-progress-fill" style="width: 0%"></div></div>
+            <div class="pp-progress-stats">
+              <span id="pp-progress-pct">0%</span>
+              <span>~{{ words | divided_by: 220 | at_least: 1 }} min total</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tp-pane">
+        <div class="tp-pane-header">
+          <span class="tp-pane-dot tp-pane-dot-ok"></span>
+          <span class="tp-pane-title">Share-Post</span>
+        </div>
+        <div class="tp-pane-body">
+          <div class="pp-share">
+            <a href="https://www.linkedin.com/sharing/share-offsite/?url={{ site.url }}{{ page.url }}" target="_blank" rel="noopener" class="pp-share-link">PS&gt; ConvertTo-LinkedInPost</a>
+            <a href="https://bsky.app/intent/compose?text={{ page.title | url_encode }}%20{{ site.url }}{{ page.url }}" target="_blank" rel="noopener" class="pp-share-link">PS&gt; ConvertTo-Bluesky</a>
+            <a href="{{ site.url }}{{ page.url }}" class="pp-share-link">PS&gt; Copy-PermaLink</a>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <div class="pp-body">
       {{ content }}
-    {% endif %}
+    </div>
   </div>
 
-  <div class="post-navigation">
-    {%- if page.previous.url -%}
-      <a class="prev-post" href="{{ page.previous.url | relative_url }}">
-        <span class="prompt">PS&gt;</span> Set-Location ..\{{ page.previous.title | truncate: 30 | slugify }}
-      </a>
-    {%- endif -%}
-    {%- if page.next.url -%}
-      <a class="next-post" href="{{ page.next.url | relative_url }}">
-        <span class="prompt">PS&gt;</span> Set-Location ..\{{ page.next.title | truncate: 30 | slugify }}
-      </a>
-    {%- endif -%}
+  <div class="pp-end">
+    <div class="pp-end-prompt">
+      <span class="tp-cmd-path">PS C:\ALProjects\BCBlog&gt;</span>
+      <span class="tp-cmd-verb">Get-NextPost</span>
+      <span class="tp-cmd-flag">-Series</span>
+      <span class="tp-cmd-string">"{{ page.categories | first | default: 'BC' }}"</span>
+      <span class="tp-cursor tp-cursor-block">█</span>
+    </div>
+    <div class="pp-next">
+      {% if page.previous %}
+        <a href="{{ page.previous.url | relative_url }}" class="pp-next-card">
+          <div class="pp-next-label">‹ Previous</div>
+          <div class="pp-next-title">{{ page.previous.title | escape }}</div>
+          <div class="pp-next-meta">{{ page.previous.date | date: '%Y-%m-%d' }}</div>
+        </a>
+      {% else %}<span></span>{% endif %}
+      {% if page.next %}
+        <a href="{{ page.next.url | relative_url }}" class="pp-next-card pp-next-card-active">
+          <div class="pp-next-label">Next ›</div>
+          <div class="pp-next-title">{{ page.next.title | escape }}</div>
+          <div class="pp-next-meta">{{ page.next.date | date: '%Y-%m-%d' }}</div>
+        </a>
+      {% else %}<span></span>{% endif %}
+    </div>
   </div>
 </article>
+
+<script>
+  (function(){
+    var fill = document.getElementById('pp-progress-fill');
+    var pct = document.getElementById('pp-progress-pct');
+    var article = document.querySelector('.pp-article');
+    if (!fill || !article) return;
+    function update(){
+      var top = article.offsetTop;
+      var h = article.offsetHeight;
+      var scrolled = window.scrollY - top + window.innerHeight * 0.5;
+      var p = Math.max(0, Math.min(100, Math.round((scrolled / h) * 100)));
+      fill.style.width = p + '%';
+      if (pct) pct.textContent = p + '%';
+    }
+    document.addEventListener('scroll', update, { passive: true });
+    update();
+  })();
+</script>

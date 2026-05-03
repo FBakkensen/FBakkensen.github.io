@@ -7,7 +7,7 @@
     {%- seo -%}
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cascadia+Code:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ "/assets/css/main.css" | relative_url }}">
     <link rel="shortcut icon" type="image/x-icon" href="{{ "/favicon.ico" | relative_url }}">
     {%- feed_meta -%}
@@ -16,46 +16,72 @@
     {%- endif -%}
   </head>
   <body>
-    <div class="terminal-container">
-      <header class="terminal-header">
-        <div class="terminal-bar">
-          <div class="terminal-title">
-            <a href="{{ "/" | relative_url }}" class="logo-link">BC Development</a>
-          </div>
-          <button class="hamburger-menu" aria-label="Toggle navigation menu" aria-expanded="false">
-            <span class="hamburger-line"></span>
-            <span class="hamburger-line"></span>
-            <span class="hamburger-line"></span>
-          </button>
-          <nav class="terminal-nav">
-            <a href="{{ "/" | relative_url }}" class="nav-link">Blog</a>
-            <a href="{{ "/tags/" | relative_url }}" class="nav-link">Tags</a>
-            <a href="{{ "/about" | relative_url }}" class="nav-link">About</a>
-            <a href="{{ site.linkedin_url }}" class="nav-link linkedin-button" target="_blank" rel="noopener noreferrer">
-              <span class="prompt">PS&gt;</span> Connect
-            </a>
-          </nav>
+    <div class="tp-root{% if page.layout == 'post' %} pp-root{% endif %}">
+      <!-- Window chrome (Windows Terminal) -->
+      <div class="tp-chrome">
+        <div class="tp-chrome-tabs">
+          <span class="tp-tab tp-tab-active">
+            <span class="tp-tab-icon">›_</span>
+            Windows PowerShell
+            <span class="tp-tab-x">×</span>
+          </span>
+          <span class="tp-tab">
+            <span class="tp-tab-icon">≡</span>
+            blog.ps1
+            <span class="tp-tab-x">×</span>
+          </span>
+          <span class="tp-tab-add">+</span>
+          <span class="tp-tab-add">⌄</span>
         </div>
+        <div class="tp-chrome-title">fbakkensen@BCDEV: ~\ALProjects\BCBlog</div>
+        <div class="tp-winctrls">
+          <span class="tp-winctrl tp-winctrl-min" title="Minimize">─</span>
+          <span class="tp-winctrl tp-winctrl-max" title="Maximize">▢</span>
+          <span class="tp-winctrl tp-winctrl-close" title="Close">×</span>
+        </div>
+      </div>
+
+      <!-- Top nav -->
+      <header class="tp-nav">
+        <div class="tp-nav-brand">
+          <span class="tp-brand-glyph">›</span>
+          <a href="{{ "/" | relative_url }}" class="tp-brand-text">BC Development</a>
+          <span class="tp-brand-suffix">.ps1</span>
+        </div>
+        <button class="hamburger-menu" aria-label="Toggle navigation menu" aria-expanded="false">
+          <span class="hamburger-line"></span>
+          <span class="hamburger-line"></span>
+          <span class="hamburger-line"></span>
+        </button>
+        <nav class="tp-nav-links terminal-nav">
+          <a href="{{ "/" | relative_url }}" class="tp-nav-link nav-link"><span class="tp-nav-prompt">PS&gt;</span>Blog</a>
+          <a href="{{ "/tags/" | relative_url }}" class="tp-nav-link nav-link"><span class="tp-nav-prompt">PS&gt;</span>Tags</a>
+          <a href="{{ "/about" | relative_url }}" class="tp-nav-link nav-link"><span class="tp-nav-prompt">PS&gt;</span>About</a>
+          <a href="{{ site.linkedin_url }}" class="tp-nav-cta nav-link" target="_blank" rel="noopener noreferrer">
+            <span class="tp-nav-prompt tp-cta-prompt">PS&gt;</span>Connect<span class="tp-cursor-bar">▌</span>
+          </a>
+        </nav>
       </header>
 
-      <main class="terminal-main">
-        {{ content }}
-      </main>
+      <main>{{ content }}</main>
 
-      <footer class="terminal-footer">
-        <div class="footer-content">
-          <span class="prompt">PS C:\ALProjects&gt;</span> Write-Host "© {{ 'now' | date: '%Y' }} {{ site.author.name | default: site.title }} - Business Central Developer" -ForegroundColor Cyan
-          <br>
-          <span class="output">© {{ 'now' | date: '%Y' }} {{ site.author.name | default: site.title }} - Business Central Developer</span>
-          <div class="footer-social">
-            <a href="{{ site.linkedin_url }}" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-            <span class="separator">|</span>
-            <a href="{{ site.github_url }}" target="_blank" rel="noopener noreferrer">GitHub</a>
-            <span class="separator">|</span>
-            <a href="{{ site.twitter_url }}" target="_blank" rel="noopener noreferrer">X</a>
-            <span class="separator">|</span>
-            <a href="{{ site.bluesky_url }}" target="_blank" rel="noopener noreferrer">Bluesky</a>
-          </div>
+      <!-- Footer -->
+      <footer class="tp-foot">
+        <div class="tp-foot-line">
+          <span class="tp-cmd-path">PS C:\&gt;</span>
+          <span class="tp-cmd-verb">Write-Host</span>
+          <span class="tp-cmd-string">"© {{ 'now' | date: '%Y' }} {{ site.author.name | default: site.title }} — Business Central Developer"</span>
+          <span class="tp-cmd-flag">-ForegroundColor</span>
+          <span class="tp-cmd-flag">Magenta</span>
+        </div>
+        <div class="tp-foot-links">
+          <a href="{{ site.linkedin_url }}" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+          <span class="tp-foot-sep">·</span>
+          <a href="{{ site.github_url }}" target="_blank" rel="noopener noreferrer">GitHub</a>
+          <span class="tp-foot-sep">·</span>
+          <a href="{{ site.twitter_url }}" target="_blank" rel="noopener noreferrer">X</a>
+          <span class="tp-foot-sep">·</span>
+          <a href="{{ site.bluesky_url }}" target="_blank" rel="noopener noreferrer">Bluesky</a>
         </div>
       </footer>
     </div>
@@ -65,34 +91,26 @@
     <script>
       function initMermaid() {
         mermaid.initialize({
-        startOnLoad: true,
-        theme: 'base',
-        themeVariables: {
-          background: 'transparent',
-          primaryColor: '#003d82',
-          primaryTextColor: '#d4d4d4',
-          primaryBorderColor: '#0066cc',
-          lineColor: '#c0c0c0',
-          secondaryColor: '#003d82',
-          tertiaryColor: '#003d82',
-          textColor: '#d4d4d4',
-          nodeTextColor: '#d4d4d4',
-          defaultLinkColor: '#c0c0c0',
-          clusterBkg: '#003d82',
-          clusterBorder: '#0066cc',
-          mainBkg: '#003d82',
-          actorBkg: '#003d82',
-          actorBorder: '#0066cc',
-          actorTextColor: '#d4d4d4',
-          labelBoxBkgColor: '#003d82',
-          labelBoxBorderColor: '#0066cc',
-          pie1: '#00ffff',
-          pie2: '#ffff00',
-          pie3: '#00ff00',
-          pie4: '#ff00ff',
-          pie5: '#ff0000',
-          fontFamily: 'Cascadia Code, Consolas, Monaco, Courier New, monospace',
-        }
+          startOnLoad: true,
+          theme: 'base',
+          themeVariables: {
+            background: 'transparent',
+            primaryColor: '#11161D',
+            primaryBorderColor: '#22272E',
+            primaryTextColor: '#E6EDF3',
+            lineColor: '#7D8590',
+            textColor: '#E6EDF3',
+            secondaryColor: '#161B22',
+            tertiaryColor: '#11161D',
+            nodeTextColor: '#E6EDF3',
+            mainBkg: '#11161D',
+            actorBkg: '#11161D',
+            actorBorder: '#22272E',
+            actorTextColor: '#E6EDF3',
+            labelBoxBkgColor: '#161B22',
+            labelBoxBorderColor: '#22272E',
+            fontFamily: 'JetBrains Mono, Cascadia Code, Consolas, monospace'
+          }
         });
       }
     </script>

@@ -1,15 +1,15 @@
 ---
 layout: base
 ---
-<article class="page">
-  <header class="page-header">
-    <div class="terminal-prompt">
-      <span class="prompt">PS C:\ALProjects\BCBlog&gt;</span> Get-Content .\{{ page.title | slugify }}.md
-    </div>
-    <h1 class="page-title">{{ page.title | escape }}</h1>
+<article class="pp-article">
+  <header class="pp-header">
+    <h1 class="pp-title">{{ page.title | escape }}</h1>
+    {% if page.description %}
+      <p class="pp-deck">{{ page.description }}</p>
+    {% endif %}
   </header>
 
-  <div class="page-content">
+  <div class="pp-body">
     {{ content }}
   </div>
 </article>

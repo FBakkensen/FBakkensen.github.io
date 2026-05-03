@@ -6,6 +6,7 @@ _site/
 
 # Bundler dependencies
 vendor/
+.bundle/
 
 # VS Code settings
 .vscode/
