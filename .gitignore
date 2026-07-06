@@ -20,3 +20,5 @@ Thumbs.db
 
 # Playwright test artifacts
 .playwright-mcp/
+# Python
+__pycache__/
