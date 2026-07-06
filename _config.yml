@@ -26,6 +26,15 @@ paginate: 5         # Posts per page
 paginate_path: "/page:num/"  # URL structure for paginated pages
 google_analytics: G-5FQ1BD5CNH # Google Analytics tracking ID
 
+# Keep repo tooling out of the published site (exclude replaces Jekyll's
+# defaults, so the defaults are restated here)
+exclude:
+  - scripts/
+  - Gemfile
+  - Gemfile.lock
+  - vendor/
+  - node_modules/
+
 # Markdown settings
 markdown: kramdown
 kramdown:
