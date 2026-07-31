@@ -4,6 +4,7 @@
 
 ## Posts
 
+- [The AI Software Factory: Automate Execution, Not Decisions](https://fbakkensen.github.io/ai/development/2026/07/31/ai-software-factory-automate-execution-not-decisions.html): How my AI software factory works: AI in every phase, reviews at every gate, decisions kept human, and agile replanning instead of spec-driven autonomy.
 - [Agentic Development Mid-2026: Cost Comes Before Gain](https://fbakkensen.github.io/ai/development/2026/07/07/agentic-development-mid-2026-cost-before-gain.html): A mid-2026 reflection on agentic development: why cost arrives before gain, how tools stratify by maturity, and why developers talk past each other.
 - [Constraints, Not Taste: Building a VS Code Theme as a Non-Designer with ChatGPT, GPT Image 2, Claude Design, and Claude Code](https://fbakkensen.github.io/ai/tools/accessibility/2026/05/11/building-vs-code-theme-as-non-designer-ai-pipeline.html): How a non-designer built OperatorDark, a colorblind-friendly VS Code theme, by stacking four AI tools and re-asserting two constraints at every handoff.
 - [Why Software Fundamentals Matter More in the Age of AI](https://fbakkensen.github.io/ai/software%20engineering/business%20central/al/2026/05/03/why-software-fundamentals-matter-more-in-the-age-of-ai.html): Six pre-LLM software-engineering principles that read, in 2026, like instruction manuals for working with AI coding agents.
