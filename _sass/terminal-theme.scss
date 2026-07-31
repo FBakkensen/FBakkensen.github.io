@@ -1,6 +1,6 @@
 /* =========================================================================
    Windows Terminal Pro — Jekyll Blog Theme
-   Magenta accent · Spacious density · Chrome on · Block cursor
+   Magenta accent · Spacious density · Chrome on
    ========================================================================= */
 
 /* ---------- Reset / globals --------------------------------------------- */
@@ -206,7 +206,6 @@ img, svg { max-width: 100%; height: auto; }
 }
 .tp-nav-cta:hover { background: rgba(210, 168, 255, 0.14); }
 .tp-cta-prompt { color: var(--tp-prompt); }
-.tp-cursor-bar { animation: tp-blink 1s steps(1) infinite; }
 
 /* Hamburger menu (mobile) — keep for mobile-nav.js */
 .hamburger-menu {
@@ -265,15 +264,6 @@ img, svg { max-width: 100%; height: auto; }
 }
 .tp-h1-cmd { color: var(--tp-prompt); }
 .tp-h1-string { color: var(--tp-string); font-weight: 500; }
-.tp-cursor {
-  display: inline-block;
-  margin-left: 4px;
-  color: var(--tp-prompt);
-  animation: tp-blink 1.05s steps(1) infinite;
-  transform: translateY(-2px);
-}
-
-@keyframes tp-blink { 50% { opacity: 0; } }
 
 .tp-hero-meta {
   display: flex;
@@ -534,10 +524,6 @@ a.tp-tag:hover { border-color: var(--tp-prompt); }
 .tp-whoami-row { display: grid; grid-template-columns: 60px 1fr; gap: 8px; }
 .tp-whoami-key { color: var(--tp-mute-2); }
 .tp-whoami-val { color: var(--tp-text); }
-.tp-whoami-cursor {
-  color: var(--tp-prompt);
-  animation: tp-blink 1.05s steps(1) infinite;
-}
 
 /* recent posts pane */
 .tp-recent { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 6px; }
@@ -576,7 +562,6 @@ a.tp-tag:hover { border-color: var(--tp-prompt); }
   min-width: 0;
 }
 .tp-search-input::placeholder { color: var(--tp-mute-2); }
-.tp-search-cursor { color: var(--tp-prompt); animation: tp-blink 1.05s steps(1) infinite; }
 .tp-search-hint {
   margin-top: 8px;
   font-size: 11px;
