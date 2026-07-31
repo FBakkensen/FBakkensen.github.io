@@ -206,7 +206,6 @@ img, svg { max-width: 100%; height: auto; }
 }
 .tp-nav-cta:hover { background: rgba(210, 168, 255, 0.14); }
 .tp-cta-prompt { color: var(--tp-prompt); }
-.tp-cursor-bar { animation: tp-blink 1s steps(1) infinite; }
 
 /* Hamburger menu (mobile) — keep for mobile-nav.js */
 .hamburger-menu {
@@ -269,11 +268,8 @@ img, svg { max-width: 100%; height: auto; }
   display: inline-block;
   margin-left: 4px;
   color: var(--tp-prompt);
-  animation: tp-blink 1.05s steps(1) infinite;
   transform: translateY(-2px);
 }
-
-@keyframes tp-blink { 50% { opacity: 0; } }
 
 .tp-hero-meta {
   display: flex;
@@ -536,7 +532,6 @@ a.tp-tag:hover { border-color: var(--tp-prompt); }
 .tp-whoami-val { color: var(--tp-text); }
 .tp-whoami-cursor {
   color: var(--tp-prompt);
-  animation: tp-blink 1.05s steps(1) infinite;
 }
 
 /* recent posts pane */
@@ -576,7 +571,7 @@ a.tp-tag:hover { border-color: var(--tp-prompt); }
   min-width: 0;
 }
 .tp-search-input::placeholder { color: var(--tp-mute-2); }
-.tp-search-cursor { color: var(--tp-prompt); animation: tp-blink 1.05s steps(1) infinite; }
+.tp-search-cursor { color: var(--tp-prompt); }
 .tp-search-hint {
   margin-top: 8px;
   font-size: 11px;
