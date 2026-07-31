@@ -7,7 +7,6 @@ layout: base
   <h1 class="tp-h1">
     <span class="tp-h1-cmd">Write-Output</span>
     <span class="tp-h1-string">"Deep Dive into Business Central Development"</span>
-    <span class="tp-cursor tp-cursor-block">█</span>
   </h1>
   <div class="tp-hero-meta">
     <span class="tp-hero-meta-item"><span class="tp-meta-key">Author</span>{{ site.author.name }}</span>
@@ -101,7 +100,7 @@ layout: base
           <div class="tp-whoami-row"><span class="tp-whoami-key">Stack</span><span class="tp-whoami-val">{{ site.author.stack | default: 'AL · PowerShell · AI' }}</span></div>
           <div class="tp-whoami-row"><span class="tp-whoami-key">Loc</span><span class="tp-whoami-val">{{ site.author.location | default: 'Aalborg, DK' }}</span></div>
         </div>
-        <div class="tp-whoami-line"><span class="tp-whoami-prompt">PS&gt;</span> <span class="tp-whoami-cursor">▌</span></div>
+        <div class="tp-whoami-line"><span class="tp-whoami-prompt">PS&gt;</span></div>
       </div>
     </div>
 
@@ -133,7 +132,6 @@ layout: base
         <form class="tp-search" action="{{ '/tags/' | relative_url }}" method="get">
           <span class="tp-search-prompt">PS&gt;</span>
           <input class="tp-search-input" name="q" placeholder="Find-Post -Query …" />
-          <span class="tp-search-cursor">▌</span>
         </form>
         <div class="tp-search-hint">Tip: try <code>-Tag AI</code> or <code>-After 2026-01</code></div>
       </div>
