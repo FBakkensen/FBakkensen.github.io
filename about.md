@@ -1,9 +1,16 @@
 ---
 layout: page
 title: About
+description: Business Central developer, consultant, and writer.
 ---
 
-<img src="/assets/images/profilepicture.png" alt="Flemming Bakkensen" style="float: right; margin: 2em 0 1em 1em; width: 200px;">
+<dl class="facts">
+  <dt>Role</dt><dd>{{ site.author.role }}</dd>
+  <dt>Stack</dt><dd>{{ site.author.stack }}</dd>
+  <dt>Location</dt><dd>{{ site.author.location }}</dd>
+</dl>
+
+<img src="{{ '/assets/images/profilepicture.png' | relative_url }}" alt="Flemming Bakkensen" class="about-photo">
 
 ## Introduction
 

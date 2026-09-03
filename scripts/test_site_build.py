@@ -159,7 +159,21 @@ class PostTests(SiteTestCase):
 
 
 class PageTests(SiteTestCase):
-    pass
+    def test_about_has_no_signature_and_has_facts(self):
+        html = self.read(ABOUT)
+        self.assertEqual(self.count(r'<p class="sig">', html), 0)
+        self.assertIn('class="facts"', html)
+        for label in ["Role", "Stack", "Location"]:
+            self.assertIn(label, html)
+
+    def test_tags_has_no_signature_and_keeps_filter_hooks(self):
+        html = self.read(TAGS)
+        self.assertEqual(self.count(r'<p class="sig">', html), 0)
+        self.assertNotIn("pp-breadcrumb", html)
+        self.assertNotIn("Read-Post", html)
+        self.assertIn('id="tag-cloud"', html)
+        self.assertIn('id="tag-posts"', html)
+        self.assertIn('id="selected-tag"', html)
 
 
 class CleanupTests(SiteTestCase):

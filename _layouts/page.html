@@ -1,15 +1,12 @@
 ---
 layout: base
 ---
-<article class="pp-article">
-  <header class="pp-header">
-    <h1 class="pp-title">{{ page.title | escape }}</h1>
-    {% if page.description %}
-      <p class="pp-deck">{{ page.description }}</p>
-    {% endif %}
+<article class="page wrap">
+  <header class="page__header">
+    <h1 class="page-title">{{ page.title | escape }}</h1>
+    {% if page.description %}<p class="deck">{{ page.description | escape }}</p>{% endif %}
   </header>
-
-  <div class="pp-body">
+  <div class="post-body">
     {{ content }}
   </div>
 </article>

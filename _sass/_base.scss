@@ -76,3 +76,23 @@ img, svg { max-width: 100%; height: auto; }
   align-items: center;
   gap: 4px 12px;
 }
+
+.page__header { padding: 36px 0 16px; }
+
+.facts {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  gap: 4px 16px;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  margin: 0 0 24px;
+  padding: 12px 16px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--surface);
+}
+.facts dt { color: var(--mute); }
+.facts dd { margin: 0; }
+
+.about-photo { float: right; width: 160px; margin: 0 0 1em 1.5em; border-radius: 12px; }
+@media (max-width: 600px) { .about-photo { float: none; display: block; margin: 0 0 1em; } }
