@@ -16,7 +16,7 @@
 - Post content, URLs, permalinks, feed, sitemap and `llms.txt` generation are untouched.
 - Body font Inter, 17px below 768px, 18px from 768px, line-height 1.65. Reading column max-width 42rem.
 - Monospace font stack everywhere it is used: `"JetBrains Mono", "Cascadia Code", ui-monospace, monospace`.
-- Exactly one signature command line per page: home `PS C:\Blog> Get-ChildItem .\posts\ | Sort-Object Date -Descending`; post `PS C:\DevProjects\DevBlog> Get-Content .\<FirstCategory>\<TitleWords>.md`; none on About and Tags.
+- Exactly one signature command line per page: home `PS C:\Blog> Get-ChildItem .\posts\ | Sort-Object Date -Descending`; post `PS C:\DevProjects\DevBlog> Get-Content .\<FirstCategory>\<FirstFourTitleWords>.md` (a post may override the file name with `signature_file:` in front matter); none on About and Tags.
 - Nav text is exactly `Blog`, `Tags`, `About`. Footer links are exactly LinkedIn, GitHub, X, RSS. No Bluesky anywhere in layouts.
 - Theme toggle persists in `localStorage` key `theme` with values `light` or `dark`; default is `prefers-color-scheme`.
 - Rail breakpoint is 1100px. Rail sticky offset is 76px.
@@ -540,7 +540,6 @@ h1, h2, h3, h4 {
     var nodes = document.querySelectorAll('.mermaid');
     if (!nodes.length) return;
     nodes.forEach(function (n) {
-      if (n.dataset.source === undefined) n.dataset.source = n.textContent;
       n.removeAttribute('data-processed');
       n.innerHTML = n.dataset.source;
     });
@@ -549,6 +548,9 @@ h1, h2, h3, h4 {
   }
 
   document.addEventListener('DOMContentLoaded', function () {
+    // Mermaid (deferred, renders on load) replaces node contents with SVG; keep the source first.
+    document.querySelectorAll('.mermaid').forEach(function (n) { n.dataset.source = n.innerHTML; });
+
     var btn = document.getElementById('theme-toggle');
     if (btn) {
       setIcon(btn);
@@ -577,7 +579,7 @@ h1, h2, h3, h4 {
 })();
 ```
 
-Mermaid's `.mermaid` nodes keep their original source in `data-source` on first re-render so a second toggle works. `mermaid.run` exists in Mermaid 10.
+Posts author diagrams as `<div class="mermaid">` blocks. `DOMContentLoaded` fires before the deferred Mermaid script's `load` render, so `data-source` holds the diagram text and every toggle re-renders from it. `mermaid.run` exists in Mermaid 10.
 
 - [ ] **Step 9: Rewrite `_layouts/base.html`**
 
@@ -671,7 +673,9 @@ Replace its contents with:
 
 If the existing file has different front matter or extra lines before the imports, keep the front matter (the two `---` lines) and replace everything else.
 
-- [ ] **Step 11: Update `_config.yml` description**
+- [ ] **Step 11: Update `_config.yml` description and excludes**
+
+Add `  - docs/` to the `exclude:` list directly after `  - scripts/` (the list replaces Jekyll's defaults, so spec and plan files would otherwise be published as static files).
 
 Change:
 ```yaml
@@ -773,7 +777,7 @@ Renders the single signature command line for a page.
 <p class="sig"><span class="sig__path">PS C:\Blog&gt;</span> <span class="sig__verb">Get-ChildItem</span> .\posts\ | <span class="sig__verb">Sort-Object</span> Date -Descending</p>
 {%- elsif include.kind == "post" -%}
 {%- assign category = include.post.categories | first | default: "Posts" | replace: " ", "" -%}
-{%- assign words = include.post.title | split: " " -%}
+{%- assign words = include.post.signature_file | default: include.post.title | truncatewords: 4, "" | split: " " -%}
 {%- capture file -%}{%- for w in words -%}{{ w | remove: ":" | remove: "," | remove: "'" | remove: "’" | remove: '"' | remove: "?" | remove: "!" | remove: "(" | remove: ")" | remove: "." | remove: "/" | remove: "-" }}{%- endfor -%}{%- endcapture -%}
 <p class="sig"><span class="sig__path">PS C:\DevProjects\DevBlog&gt;</span> <span class="sig__verb">Get-Content</span> <span class="sig__str">.\{{ category }}\{{ file }}.md</span></p>
 {%- endif -%}
@@ -920,7 +924,7 @@ class PostTests(SiteTestCase):
     def test_exactly_one_signature_line_with_get_content(self):
         html = self.read(POST)
         self.assertEqual(self.count(r'<p class="sig">', html), 1)
-        self.assertIn(r'Get-Content</span> <span class="sig__str">.\AI\TheAISoftwareFactoryAutomateExecutionNotDecisions.md', html)
+        self.assertIn(r'Get-Content</span> <span class="sig__str">.\AI\TheAISoftwareFactory.md', html)
 
     def test_header_pieces(self):
         html = self.read(POST)
@@ -1344,7 +1348,7 @@ Replace with:
         {% assign headerWords = header | strip | split: " " %}
         {% assign firstWord = headerWords | first %}
         {% assign firstWordSize = firstWord | size %}
-        {% assign firstWordAscii = firstWord | slugify | size %}
+        {% assign firstWordAscii = firstWord | slugify: "ascii" | size %}
         {% if firstWordAscii == 0 and firstWordSize > 0 and headerWords.size > 1 %}
             {% assign header = headerWords | shift | join: " " %}
         {% endif %}
@@ -1501,25 +1505,84 @@ Replace everything from the opening `<div class="tags-page">` through the closin
 </div>
 ```
 
-In the `<script>` block make these edits:
+Replace the whole `<script>` block with:
 
-1. In the tag cloud loop, change `tagLink.className = 'tag-link';` to `tagLink.className = 'tag tag--count';` and change the `innerHTML` line to:
-   ```javascript
-   tagLink.innerHTML = `${tag} <span class="tag__count">${count}</span>`;
-   ```
-2. In `showPostsForTag`, change `document.querySelectorAll('.tag-link')` to `document.querySelectorAll('.tag--count')` and `link.classList.add('active')` / `remove('active')` to `is-active`. Replace the `link.textContent.includes(tag)` test with `link.dataset.tag === tag` and add `tagLink.dataset.tag = tag;` right after `tagLink.className = ...` in the loop.
-3. Replace the `postEl.innerHTML = \`...\`` template in `displayPosts` with:
-   ```javascript
-    postEl.className = 'post-list__item';
-    postEl.innerHTML = `
+```html
+<script>
+const posts = [
+  {% for post in site.posts %}
+  {
+    title: {{ post.title | jsonify }},
+    url: {{ post.url | jsonify }},
+    date: {{ post.date | date: "%Y-%m-%d" | jsonify }},
+    excerpt: {{ post.description | default: post.excerpt | strip_html | normalize_whitespace | truncatewords: 40 | jsonify }},
+    tags: {{ post.tags | jsonify }}
+  }{% unless forloop.last %},{% endunless %}
+  {% endfor %}
+];
+
+const slugOf = (tag) => tag.toLowerCase().trim().replace(/\s+/g, '-');
+const tagCounts = {};
+const bySlug = {};
+posts.forEach((post) => {
+  (post.tags || []).forEach((tag) => {
+    tagCounts[tag] = (tagCounts[tag] || 0) + 1;
+    bySlug[slugOf(tag)] = tag;
+  });
+});
+
+const cloud = document.getElementById('tag-cloud');
+Object.entries(tagCounts)
+  .sort((a, b) => b[1] - a[1])
+  .forEach(([tag, count]) => {
+    const link = document.createElement('a');
+    link.href = '#' + slugOf(tag);
+    link.className = 'tag tag--count';
+    link.dataset.tag = tag;
+    link.innerHTML = `${tag} <span class="tag__count">${count}</span>`;
+    cloud.appendChild(link);
+  });
+
+function displayPosts(list) {
+  const container = document.getElementById('tag-posts');
+  container.innerHTML = '';
+  list.forEach((post) => {
+    const el = document.createElement('article');
+    el.className = 'post-list__item';
+    el.innerHTML = `
       <div class="meta"><time>${post.date}</time></div>
       <h2 class="post-list__title"><a href="${post.url}">${post.title}</a></h2>
       <p class="post-list__desc">${post.excerpt}</p>
     `;
-   ```
-   and delete the previous `postEl.className = 'post-preview';` line.
+    container.appendChild(el);
+  });
+}
 
-Leave the rest of the script (`posts` array, `tagCounts`, hash handling) as is.
+function showPostsForTag(tag) {
+  document.getElementById('selected-tag').textContent = tag;
+  displayPosts(posts.filter((post) => (post.tags || []).includes(tag)));
+  document.querySelectorAll('.tag--count').forEach((link) => {
+    link.classList.toggle('is-active', link.dataset.tag === tag);
+  });
+}
+
+function showAllPosts() {
+  document.getElementById('selected-tag').textContent = 'all';
+  displayPosts(posts);
+  document.querySelectorAll('.tag--count').forEach((link) => link.classList.remove('is-active'));
+}
+
+function applyHash() {
+  const tag = bySlug[decodeURIComponent(window.location.hash.slice(1))];
+  if (tag) showPostsForTag(tag); else showAllPosts();
+}
+
+window.addEventListener('hashchange', applyHash);
+applyHash();
+</script>
+```
+
+Tag pills on home and post pages link to `/tags/#<slugified tag>`, so lookups go through `bySlug`. The old script replaced hyphens with spaces before lookup, which broke every hyphenated tag.
 
 - [ ] **Step 6: Create `_sass/_tags.scss`**
 
@@ -1574,6 +1637,7 @@ class CleanupTests(SiteTestCase):
     def test_dead_files_not_built(self):
         self.assertFalse((self.site / "assets/js/mobile-nav.js").exists())
         self.assertFalse((self.site / "Screenshot.png").exists())
+        self.assertFalse((self.site / "docs").exists())
 
     def test_no_old_classes_in_pages(self):
         for rel in [HOME, TAGS, ABOUT]:
@@ -1664,7 +1728,7 @@ Run in the background: `bundle exec jekyll serve --quiet --port 4000` (or use th
 
 - [ ] **Step 2: Screenshot matrix with Chrome DevTools MCP**
 
-For each URL below, at 1280×900 and 390×844, in light and dark (set via `evaluate_script`: `() => { localStorage.setItem('theme','dark'); location.reload(); }`), take a screenshot to `docs/superpowers/verification/<page>-<w>-<theme>.png`:
+For each URL below, at 1280×900 and 390×844, in light and dark (set via `evaluate_script`: `() => { localStorage.setItem('theme','dark'); location.reload(); }`), take a screenshot to a folder outside the repository, for example `$env:TEMP\site-verification\<page>-<w>-<theme>.png` (never commit screenshots):
 
 1. `http://localhost:4000/`
 2. `http://localhost:4000/page2/`
@@ -1717,10 +1781,10 @@ Expected: 25 tests pass.
 - [ ] **Step 7: Commit**
 
 ```bash
-git add -A _config.yml docs/superpowers/verification
+git add -A _config.yml design-prototypes
 git commit -m "chore: verify redesign in browser, remove design prototypes
 
 Co-Authored-By: Claude Fable 5.1 <noreply@anthropic.com>"
 ```
 
-Then open a pull request from `claude/site-design-options-ecb571` to `main` with `GH_HOST=github.com gh pr create`, title `Redesign site: reading-first column + rail theme`, body summarising the spec sections and linking the verification screenshots, ending with `🤖 Generated with [Claude Code](https://claude.com/claude-code)`.
+Then open a pull request from `claude/site-design-options-ecb571` to `main` with `GH_HOST=github.com gh pr create`, title `Redesign site: reading-first column + rail theme`, body summarising the spec sections and the verification checklist results (attach the key screenshots to the PR with `gh pr comment --body` after uploading, or paste them via the GitHub UI), ending with `🤖 Generated with [Claude Code](https://claude.com/claude-code)`.
