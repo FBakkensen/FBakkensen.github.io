@@ -115,7 +115,47 @@ class HomeTests(SiteTestCase):
 
 
 class PostTests(SiteTestCase):
-    pass
+    def test_exactly_one_signature_line_with_get_content(self):
+        html = self.read(POST)
+        self.assertEqual(self.count(r'<p class="sig">', html), 1)
+        self.assertIn(r'Get-Content</span> <span class="sig__str">.\AI\TheAISoftwareFactory.md', html)
+
+    def test_header_pieces(self):
+        html = self.read(POST)
+        self.assertIn('class="page-title"', html)
+        self.assertIn('class="deck"', html)
+        self.assertIn('class="post-author"', html)
+        self.assertRegex(html, r"~\d+ min read")
+
+    def test_rail_and_details_toc_both_present(self):
+        html = self.read(POST)
+        self.assertEqual(self.count(r'<aside class="toc-rail"', html), 1)
+        self.assertEqual(self.count(r'<details class="toc-details"', html), 1)
+        rail = re.search(r'<aside class="toc-rail".*?</aside>', html, re.S).group(0)
+        self.assertGreaterEqual(self.count(r'<a href="#', rail), 3)
+        self.assertNotIn("🏭", rail)
+
+    def test_share_links_and_prev_next(self):
+        html = self.read(POST)
+        self.assertIn("linkedin.com/sharing/share-offsite", html)
+        self.assertIn("x.com/intent/post", html)
+        self.assertIn('id="copy-link"', html)
+        self.assertNotIn("bsky", html)
+        self.assertIn('class="post-nav"', html)
+
+    def test_removed_terminal_ui(self):
+        html = self.read(POST)
+        for needle in ["pp-breadcrumb", "Read-Progress", "Share-Post", "Get-AuthorPosts", "Get-NextPost", "tp-pane"]:
+            self.assertNotIn(needle, html)
+
+    def test_legacy_prompt_post_keeps_body_prompt_span(self):
+        html = self.read_glob(LEGACY_PROMPT_POST_GLOB)
+        self.assertEqual(self.count(r'<p class="sig">', html), 1)
+        self.assertIn('<span class="prompt">', html)
+
+    def test_toc_script_only_on_posts(self):
+        self.assertIn("/assets/js/toc.js", self.read(POST))
+        self.assertNotIn("/assets/js/toc.js", self.read(HOME))
 
 
 class PageTests(SiteTestCase):

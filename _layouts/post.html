@@ -1,136 +1,82 @@
 ---
 layout: base
 ---
-<div class="pp-breadcrumb">
-  <span class="tp-cmd-path">PS C:\ALProjects\BCBlog&gt;</span>
-  <span class="tp-cmd-verb">Set-Location</span>
-  <span class="tp-cmd-flag">-Path</span>
-  <span class="tp-cmd-string">.{{ page.url }}</span>
-</div>
+{% assign words = content | number_of_words %}
+{% assign minutes = words | divided_by: 220 | at_least: 1 %}
+{% assign name_words = site.author.name | split: " " %}
+{% capture initials %}{% for w in name_words %}{{ w | slice: 0 }}{% endfor %}{% endcapture %}
+<article class="post">
+  <div class="wrap wrap--grid">
+    <header class="post__header">
+      {% include signature.html kind="post" post=page %}
+      <h1 class="page-title">{{ page.title | escape }}</h1>
+      {% if page.description %}<p class="deck">{{ page.description | escape }}</p>{% endif %}
+      <div class="meta">
+        <time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: '%Y-%m-%d' }}</time>
+        <span>·</span>
+        <span>~{{ minutes }} min read</span>
+        {% if page.tags.size > 0 %}
+          <span>·</span>
+          <span>
+            {% for tag in page.tags %}<a class="tag" href="{{ '/tags/' | relative_url }}#{{ tag | slugify }}">{{ tag }}</a>{% endfor %}
+          </span>
+        {% endif %}
+      </div>
+      <div class="post-author">
+        <span class="post-author__avatar" aria-hidden="true">{{ initials }}</span>
+        <span><span class="post-author__name">{{ site.author.name }}</span> · {{ site.author.role }}</span>
+      </div>
+    </header>
 
-<article class="pp-article">
-  <header class="pp-header">
-    <div class="pp-meta">
-      <span class="pp-date">▣ {{ page.date | date: '%Y-%m-%d' }}</span>
-      <span class="pp-runtime">~{% assign words = content | number_of_words %}{{ words | divided_by: 220 | at_least: 1 }} min runtime</span>
-      {% if page.tags.size > 0 %}
-        <span class="pp-tags">
-          {% for tag in page.tags %}
-            <a href="{{ '/tags/' | relative_url }}#{{ tag | slugify }}" class="tp-tag"><span class="tp-tag-flag">-Tag</span>{{ tag | replace: ' ', '' }}</a>
-          {% endfor %}
-        </span>
+    {% capture toc %}{% include toc.html html=content h_min=2 h_max=2 sanitize=true %}{% endcapture %}
+    {% assign toc = toc | replace: '<ul id="markdown-toc">', '<ul>' %}
+    {% assign has_toc = toc | strip | size %}
+
+    <div class="post__main">
+      {% if page.toc != false and has_toc > 0 %}
+        <details class="toc-details" open>
+          <summary>On this page</summary>
+          {{ toc }}
+        </details>
       {% endif %}
+      <div class="post-body">
+        {{ content }}
+      </div>
+      <div class="post-share">
+        <a href="https://www.linkedin.com/sharing/share-offsite/?url={{ site.url }}{{ page.url }}" target="_blank" rel="noopener noreferrer">Share on LinkedIn</a>
+        <a href="https://x.com/intent/post?text={{ page.title | url_encode }}&url={{ site.url }}{{ page.url }}" target="_blank" rel="noopener noreferrer">Share on X</a>
+        <button type="button" id="copy-link" data-url="{{ site.url }}{{ page.url }}">Copy link</button>
+      </div>
+      <nav class="post-nav" aria-label="Adjacent posts">
+        {% if page.previous %}
+          <a href="{{ page.previous.url | relative_url }}" class="post-nav__card"><span class="post-nav__label">‹ Previous</span>{{ page.previous.title | escape }}</a>
+        {% else %}<span></span>{% endif %}
+        {% if page.next %}
+          <a href="{{ page.next.url | relative_url }}" class="post-nav__card"><span class="post-nav__label">Next ›</span>{{ page.next.title | escape }}</a>
+        {% else %}<span></span>{% endif %}
+      </nav>
     </div>
 
-    <h1 class="pp-title">{{ page.title | escape }}</h1>
-
-    {% if page.description %}
-      <p class="pp-deck">{{ page.description }}</p>
+    {% if page.toc != false and has_toc > 0 %}
+      <aside class="toc-rail" aria-label="On this page">
+        <p class="toc-rail__label">On this page</p>
+        {{ toc }}
+      </aside>
     {% endif %}
-
-    <div class="pp-author">
-      <div class="pp-avatar">FB</div>
-      <div class="pp-author-info">
-        <div class="pp-author-name">{{ site.author.name }}</div>
-        <div class="pp-author-role">{{ site.author.role | default: 'Lead Developer' }} · BCDEV\{{ site.author.name | replace: ' ', '.' }}</div>
-      </div>
-      <div class="pp-author-actions">
-        <a href="{{ '/' | relative_url }}" class="pp-author-link">PS&gt; Get-AuthorPosts</a>
-      </div>
-    </div>
-  </header>
-
-  <div class="pp-grid">
-    <aside class="pp-toc">
-      {% if page.toc != false %}
-        <div class="tp-pane">
-          <div class="tp-pane-header">
-            <span class="tp-pane-dot"></span>
-            <span class="tp-pane-title">Get-PostOutline</span>
-          </div>
-          <div class="tp-pane-body pp-toc-body">
-            {% include toc.html html=content h_min=2 h_max=2 sanitize=true %}
-          </div>
-        </div>
-      {% endif %}
-
-      <div class="tp-pane">
-        <div class="tp-pane-header">
-          <span class="tp-pane-dot tp-pane-dot-warn"></span>
-          <span class="tp-pane-title">Read-Progress</span>
-        </div>
-        <div class="tp-pane-body">
-          <div class="pp-progress">
-            <div class="pp-progress-track"><div class="pp-progress-fill" id="pp-progress-fill" style="width: 0%"></div></div>
-            <div class="pp-progress-stats">
-              <span id="pp-progress-pct">0%</span>
-              <span>~{{ words | divided_by: 220 | at_least: 1 }} min total</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="tp-pane">
-        <div class="tp-pane-header">
-          <span class="tp-pane-dot tp-pane-dot-ok"></span>
-          <span class="tp-pane-title">Share-Post</span>
-        </div>
-        <div class="tp-pane-body">
-          <div class="pp-share">
-            <a href="https://www.linkedin.com/sharing/share-offsite/?url={{ site.url }}{{ page.url }}" target="_blank" rel="noopener" class="pp-share-link">PS&gt; ConvertTo-LinkedInPost</a>
-            <a href="https://bsky.app/intent/compose?text={{ page.title | url_encode }}%20{{ site.url }}{{ page.url }}" target="_blank" rel="noopener" class="pp-share-link">PS&gt; ConvertTo-Bluesky</a>
-            <a href="{{ site.url }}{{ page.url }}" class="pp-share-link">PS&gt; Copy-PermaLink</a>
-          </div>
-        </div>
-      </div>
-    </aside>
-
-    <div class="pp-body">
-      {{ content }}
-    </div>
-  </div>
-
-  <div class="pp-end">
-    <div class="pp-end-prompt">
-      <span class="tp-cmd-path">PS C:\ALProjects\BCBlog&gt;</span>
-      <span class="tp-cmd-verb">Get-NextPost</span>
-      <span class="tp-cmd-flag">-Series</span>
-      <span class="tp-cmd-string">"{{ page.categories | first | default: 'BC' }}"</span>
-    </div>
-    <div class="pp-next">
-      {% if page.previous %}
-        <a href="{{ page.previous.url | relative_url }}" class="pp-next-card">
-          <div class="pp-next-label">‹ Previous</div>
-          <div class="pp-next-title">{{ page.previous.title | escape }}</div>
-          <div class="pp-next-meta">{{ page.previous.date | date: '%Y-%m-%d' }}</div>
-        </a>
-      {% else %}<span></span>{% endif %}
-      {% if page.next %}
-        <a href="{{ page.next.url | relative_url }}" class="pp-next-card pp-next-card-active">
-          <div class="pp-next-label">Next ›</div>
-          <div class="pp-next-title">{{ page.next.title | escape }}</div>
-          <div class="pp-next-meta">{{ page.next.date | date: '%Y-%m-%d' }}</div>
-        </a>
-      {% else %}<span></span>{% endif %}
-    </div>
   </div>
 </article>
-
 <script>
-  (function(){
-    var fill = document.getElementById('pp-progress-fill');
-    var pct = document.getElementById('pp-progress-pct');
-    var article = document.querySelector('.pp-article');
-    if (!fill || !article) return;
-    function update(){
-      var top = article.offsetTop;
-      var h = article.offsetHeight;
-      var scrolled = window.scrollY - top + window.innerHeight * 0.5;
-      var p = Math.max(0, Math.min(100, Math.round((scrolled / h) * 100)));
-      fill.style.width = p + '%';
-      if (pct) pct.textContent = p + '%';
-    }
-    document.addEventListener('scroll', update, { passive: true });
-    update();
+  (function () {
+    var btn = document.getElementById('copy-link');
+    if (!btn) return;
+    btn.addEventListener('click', function () {
+      var url = btn.dataset.url;
+      var done = function () { btn.textContent = 'Copied'; setTimeout(function () { btn.textContent = 'Copy link'; }, 2000); };
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(url).then(done, function () { window.prompt('Copy this link', url); });
+      } else {
+        window.prompt('Copy this link', url);
+      }
+    });
   })();
 </script>

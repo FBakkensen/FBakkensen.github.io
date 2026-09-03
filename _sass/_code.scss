@@ -1,0 +1,86 @@
+/* Inline code */
+code {
+  font-family: var(--font-mono);
+  font-size: 0.9em;
+}
+.post-body p code, .post-body li code, .post-body td code {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 1px 5px;
+}
+
+/* Blocks: plain kramdown output and Rouge .highlight wrapper */
+.post-body pre,
+.post-body .highlight {
+  margin: 1.4em 0;
+  background: var(--code-bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+}
+.post-body pre {
+  padding: 14px 16px;
+  overflow-x: auto;
+  font-family: var(--font-mono);
+  font-size: 14px;
+  line-height: 1.55;
+  color: var(--text);
+}
+.post-body .highlight pre { margin: 0; border: 0; border-radius: 0; background: transparent; }
+.post-body pre code { background: transparent; border: 0; padding: 0; font-size: inherit; }
+
+/* Rouge token classes */
+.highlight .c, .highlight .c1, .highlight .cm, .highlight .cp, .highlight .cs { color: var(--code-comment); font-style: italic; }
+.highlight .k, .highlight .kc, .highlight .kd, .highlight .kn, .highlight .kp, .highlight .kr, .highlight .kt, .highlight .o, .highlight .ow { color: var(--code-keyword); }
+.highlight .s, .highlight .s1, .highlight .s2, .highlight .sb, .highlight .sc, .highlight .sd, .highlight .se, .highlight .sh, .highlight .si, .highlight .sx, .highlight .sr, .highlight .ss { color: var(--code-string); }
+.highlight .nb, .highlight .nc, .highlight .nd, .highlight .ne, .highlight .nf, .highlight .nl, .highlight .nn, .highlight .nx, .highlight .py { color: var(--code-function); }
+.highlight .na, .highlight .nv, .highlight .vi, .highlight .vc, .highlight .vg { color: var(--code-variable); }
+.highlight .m, .highlight .mb, .highlight .mf, .highlight .mh, .highlight .mi, .highlight .mo, .highlight .il { color: var(--code-number); }
+.highlight .nt { color: var(--code-type); }
+.highlight .err { color: var(--code-keyword); }
+.highlight .gh, .highlight .gu { color: var(--code-number); font-weight: bold; }
+
+/* Classes produced by assets/js/code-blocks.js */
+.code-block-wrapper {
+  margin: 1.4em 0;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--code-bg);
+  overflow: hidden;
+}
+.code-block-wrapper pre { margin: 0; border: 0; border-radius: 0; }
+.code-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 6px 12px;
+  border-bottom: 1px solid var(--border);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--mute);
+}
+.copy-button {
+  font: inherit;
+  color: var(--mute);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 2px 10px;
+  cursor: pointer;
+}
+.copy-button:hover { color: var(--text); border-color: var(--accent); }
+.copy-button.copied { color: var(--path); border-color: var(--path); }
+.syntax-keyword { color: var(--code-keyword); }
+.syntax-type { color: var(--code-type); }
+.syntax-function, .syntax-builtin, .syntax-decorator { color: var(--code-function); }
+.syntax-string { color: var(--code-string); }
+.syntax-comment { color: var(--code-comment); font-style: italic; }
+.syntax-number { color: var(--code-number); }
+.syntax-variable, .syntax-attribute, .syntax-property { color: var(--code-variable); }
+.syntax-operator, .syntax-punctuation { color: var(--text); }
+.syntax-tag { color: var(--code-type); }
+.ps-prompt { color: var(--path); font-weight: 700; }
+
+/* Mermaid */
+.post-body .mermaid { text-align: center; margin: 1.4em 0; }

@@ -397,33 +397,7 @@ document.addEventListener('DOMContentLoaded', function() {
       const prompt = document.createElement('span');
       prompt.className = 'ps-prompt';
       prompt.textContent = 'PS> ';
-      prompt.style.color = '#ffff00';
-      prompt.style.fontWeight = 'bold';
       code.insertBefore(prompt, code.firstChild);
     }
-  });
-  
-  // Smooth scrolling for TOC links
-  document.querySelectorAll('.post-toc a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-      e.preventDefault();
-      const targetId = this.getAttribute('href').substring(1);
-      const targetElement = document.getElementById(targetId);
-      
-      if (targetElement) {
-        // Calculate scroll position with offset for fixed headers
-        const offset = 80; // Adjust this value based on your header height
-        const elementPosition = targetElement.getBoundingClientRect().top;
-        const offsetPosition = elementPosition + window.pageYOffset - offset;
-        
-        window.scrollTo({
-          top: offsetPosition,
-          behavior: 'smooth'
-        });
-        
-        // Update URL without jumping
-        history.pushState(null, null, '#' + targetId);
-      }
-    });
   });
 });

@@ -46,7 +46,14 @@
         {% if include.sanitize == true %}
             {% assign header = header | strip_html %}
         {% endif %}
-        
+        {% assign headerWords = header | strip | split: " " %}
+        {% assign firstWord = headerWords | first %}
+        {% assign firstWordSize = firstWord | size %}
+        {% assign firstWordAscii = firstWord | slugify: "ascii" | size %}
+        {% if firstWordAscii == 0 and firstWordSize > 0 and headerWords.size > 1 %}
+            {% assign header = headerWords | shift | join: " " %}
+        {% endif %}
+
         {% if firstHeader %}
             {% assign firstHeader = false %}
             {% assign previousLevel = headerLevel %}
