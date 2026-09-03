@@ -153,11 +153,9 @@ tags: [tag1, tag2, tag3, tag4, tag5]
 [Reinforce 2-3 main points]
 [Call to action — invite discussion]
 
-<span class="prompt">PS C:\DevProjects\DevBlog&gt;</span> [Thematic closing command]
-
 ---
 
-*What are your thoughts on [topic]? I'd love to hear your experiences — connect with me on [LinkedIn](https://www.linkedin.com/in/flemmingbakkensen/) or [Bluesky](https://bsky.app/profile/fbakkensen.bsky.social).*
+*What are your thoughts on [topic]? I'd love to hear your experiences — connect with me on [LinkedIn](https://www.linkedin.com/in/flemmingbakkensen/) or [X](https://x.com/fbakkensen).*
 ```
 
 ### Front Matter Rules
@@ -260,8 +258,8 @@ Run this checklist after drafting. Present results as a pass/fail table.
 | Heading frequency | New heading every 150-250 words |
 | Image placeholders | All have Nano Banana prompts and alt text (80-125 chars) |
 | Internal links | At least 2 links to existing posts |
-| Terminal prompts | Opening and closing terminal-style lines |
+| Terminal prompts | Opening terminal-style line only |
 | No clickbait | No false urgency, no superlatives, no hype |
 | Skip test | Narrative coherent without visuals |
 | SEO checklist | All items pass from `references/seo-checklist.md` |
-| Social CTA | Closing with LinkedIn and Bluesky links |
+| Social CTA | Closing with LinkedIn and X links |

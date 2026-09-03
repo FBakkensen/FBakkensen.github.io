@@ -1,140 +1,53 @@
 ---
 layout: base
 ---
-<!-- Hero -->
-<section class="tp-hero">
-  <div class="tp-hero-prompt"><span class="tp-hero-prompt-text">PS C:\Blog&gt;</span></div>
-  <h1 class="tp-h1">
-    <span class="tp-h1-cmd">Write-Output</span>
-    <span class="tp-h1-string">"Deep Dive into Business Central Development"</span>
-  </h1>
-  <div class="tp-hero-meta">
-    <span class="tp-hero-meta-item"><span class="tp-meta-key">Author</span>{{ site.author.name }}</span>
-    <span class="tp-hero-meta-sep">·</span>
-    <span class="tp-hero-meta-item"><span class="tp-meta-key">Posts</span>{{ site.posts.size }}</span>
-    {%- if site.posts.first -%}
-      <span class="tp-hero-meta-sep">·</span>
-      <span class="tp-hero-meta-item"><span class="tp-meta-key">Updated</span>{{ site.posts.first.date | date: '%Y-%m-%d' }}</span>
-    {%- endif -%}
-  </div>
-  <div class="tp-hero-cmdline">
-    <span class="tp-cmd-path">PS C:\ALProjects\BCBlog&gt;</span>
-    <span class="tp-cmd-verb">Get-ChildItem</span>
-    <span class="tp-cmd-flag">-Path</span> <span class="tp-cmd-string">.\posts\</span>
-    <span class="tp-cmd-flag">-Filter</span> <span class="tp-cmd-string">*.md</span>
-    <span class="tp-cmd-pipe">|</span>
-    <span class="tp-cmd-verb">Sort-Object</span>
-    <span class="tp-cmd-flag">LastWriteTime</span>
-    <span class="tp-cmd-flag">-Descending</span>
-  </div>
-</section>
+<div class="wrap">
+  <section class="home-intro">
+    {% include signature.html kind="home" %}
+  </section>
 
-<!-- Main grid -->
-<div class="tp-main">
-  <div class="tp-posts">
-    {% if paginator %}{% assign posts = paginator.posts %}{% else %}{% assign posts = site.posts %}{% endif %}
+  {% if paginator %}{% assign posts = paginator.posts %}{% else %}{% assign posts = site.posts %}{% endif %}
+  <div class="post-list">
     {% for post in posts %}
-      <article class="tp-post">
-        <div class="tp-post-gutter">
-          <span class="tp-line-num">{{ forloop.index | prepend: '00' | slice: -2, 2 }}</span>
+      <article class="post-list__item">
+        <div class="meta">
+          <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: '%Y-%m-%d' }}</time>
+          <span>·</span>
+          {% assign words = post.content | number_of_words %}
+          <span>~{{ words | divided_by: 220 | at_least: 1 }} min</span>
         </div>
-        <div class="tp-post-body">
-          <div class="tp-post-meta">
-            <span class="tp-post-date">{{ post.date | date: '%Y-%m-%d' }}</span>
-            <span class="tp-meta-sep">·</span>
-            <span class="tp-post-runtime">~{% assign words = post.content | number_of_words %}{{ words | divided_by: 220 | at_least: 1 }} min</span>
-            {% if post.tags.size > 0 %}
-              <span class="tp-meta-sep">·</span>
-              <span class="tp-post-tags">
-                {% for tag in post.tags limit: 3 %}
-                  <span class="tp-tag"><span class="tp-tag-flag">-Tag</span>{{ tag | replace: ' ', '' }}</span>
-                {% endfor %}
-              </span>
-            {% endif %}
+        <h2 class="post-list__title"><a href="{{ post.url | relative_url }}">{{ post.title | escape }}</a></h2>
+        <p class="post-list__desc">
+          {%- if post.description -%}
+            {{ post.description | escape }}
+          {%- else -%}
+            {{ post.excerpt | strip_html | normalize_whitespace | truncatewords: 40 }}
+          {%- endif -%}
+        </p>
+        {% if post.tags.size > 0 %}
+          <div class="post-list__tags">
+            {% for tag in post.tags limit: 3 %}
+              <a class="tag" href="{{ '/tags/' | relative_url }}#{{ tag | slugify }}">{{ tag }}</a>
+            {% endfor %}
           </div>
-          <h2 class="tp-post-title"><a href="{{ post.url | relative_url }}" class="tp-post-title-link">{{ post.title | escape }}</a></h2>
-          {% if site.show_excerpts %}
-            <p class="tp-post-excerpt">{{ post.excerpt | strip_html | truncatewords: 50 }}</p>
-          {% endif %}
-          <div class="tp-post-actions">
-            <a href="{{ post.url | relative_url }}" class="tp-readmore">
-              <span class="tp-readmore-prompt">PS&gt;</span>
-              Read-Post <span class="tp-readmore-flag">-FullContent</span>
-              <span class="tp-readmore-arrow">→</span>
-            </a>
-          </div>
-        </div>
+        {% endif %}
       </article>
     {% endfor %}
-
-    {% if site.paginate %}
-      <div class="tp-pager">
-        {% if paginator.previous_page %}
-          <a href="{{ paginator.previous_page_path | relative_url }}" class="tp-pager-link">‹ Set-Location -Previous</a>
-        {% else %}
-          <span class="tp-pager-link tp-pager-disabled">‹ Set-Location -Previous</span>
-        {% endif %}
-        <span class="tp-pager-page">Page <b>{{ paginator.page }}</b> of <b>{{ paginator.total_pages }}</b></span>
-        {% if paginator.next_page %}
-          <a href="{{ paginator.next_page_path | relative_url }}" class="tp-pager-link">Set-Location -Next ›</a>
-        {% else %}
-          <span class="tp-pager-link tp-pager-disabled">Set-Location -Next ›</span>
-        {% endif %}
-      </div>
-    {% endif %}
   </div>
 
-  <aside class="tp-side">
-    <!-- whoami pane -->
-    <div class="tp-pane">
-      <div class="tp-pane-header">
-        <span class="tp-pane-dot"></span>
-        <span class="tp-pane-title">whoami</span>
-        <span class="tp-pane-len">3 lines</span>
-      </div>
-      <div class="tp-pane-body">
-        <div class="tp-whoami-line"><span class="tp-whoami-prompt">PS&gt;</span> <span class="tp-whoami-cmd">whoami</span></div>
-        <div class="tp-whoami-out">BCDEV\{{ site.author.name | default: 'Frederik Bakkensen' | replace: ' ', '.' }}</div>
-        <div class="tp-whoami-grid">
-          <div class="tp-whoami-row"><span class="tp-whoami-key">Role</span><span class="tp-whoami-val">{{ site.author.role | default: 'Sr. BC Developer' }}</span></div>
-          <div class="tp-whoami-row"><span class="tp-whoami-key">Stack</span><span class="tp-whoami-val">{{ site.author.stack | default: 'AL · PowerShell · AI' }}</span></div>
-          <div class="tp-whoami-row"><span class="tp-whoami-key">Loc</span><span class="tp-whoami-val">{{ site.author.location | default: 'Aalborg, DK' }}</span></div>
-        </div>
-        <div class="tp-whoami-line"><span class="tp-whoami-prompt">PS&gt;</span></div>
-      </div>
-    </div>
-
-    <!-- Recent posts pane -->
-    <div class="tp-pane">
-      <div class="tp-pane-header">
-        <span class="tp-pane-dot tp-pane-dot-warn"></span>
-        <span class="tp-pane-title">Get-RecentPosts -Count 5</span>
-      </div>
-      <div class="tp-pane-body">
-        <ol class="tp-recent">
-          {% for post in site.posts limit:5 %}
-            <li class="tp-recent-item">
-              <span class="tp-recent-num">[{{ forloop.index | prepend: '00' | slice: -2, 2 }}]</span>
-              <a href="{{ post.url | relative_url }}" class="tp-recent-link">{{ post.title | truncate: 38 }}</a>
-            </li>
-          {% endfor %}
-        </ol>
-      </div>
-    </div>
-
-    <!-- Find-Post pane -->
-    <div class="tp-pane">
-      <div class="tp-pane-header">
-        <span class="tp-pane-dot tp-pane-dot-ok"></span>
-        <span class="tp-pane-title">Find-Post</span>
-      </div>
-      <div class="tp-pane-body">
-        <form class="tp-search" action="{{ '/tags/' | relative_url }}" method="get">
-          <span class="tp-search-prompt">PS&gt;</span>
-          <input class="tp-search-input" name="q" placeholder="Find-Post -Query …" />
-        </form>
-        <div class="tp-search-hint">Tip: try <code>-Tag AI</code> or <code>-After 2026-01</code></div>
-      </div>
-    </div>
-  </aside>
+  {% if paginator and paginator.total_pages > 1 %}
+    <nav class="pager" aria-label="Pagination">
+      {% if paginator.previous_page %}
+        <a href="{{ paginator.previous_page_path | relative_url }}">‹ Newer</a>
+      {% else %}
+        <span class="pager__disabled">‹ Newer</span>
+      {% endif %}
+      <span class="meta">Page {{ paginator.page }} of {{ paginator.total_pages }}</span>
+      {% if paginator.next_page %}
+        <a href="{{ paginator.next_page_path | relative_url }}">Older ›</a>
+      {% else %}
+        <span class="pager__disabled">Older ›</span>
+      {% endif %}
+    </nav>
+  {% endif %}
 </div>

@@ -1,0 +1,28 @@
+/* Home top: the signature line only, so nothing competes with the first post */
+.home-intro { padding: 36px 0 4px; }
+
+.post-list { list-style: none; margin: 0; padding: 0; }
+.post-list__item {
+  padding: 26px 0;
+  border-bottom: 1px solid var(--border);
+}
+.post-list__item .meta { margin-bottom: 8px; }
+.post-list__title {
+  font-size: 1.35rem;
+  line-height: 1.3;
+  margin: 0 0 8px;
+}
+.post-list__title a { color: var(--text); }
+.post-list__desc {
+  margin: 0 0 10px;
+  color: var(--mute);
+  font-size: 0.95em;
+}
+
+.pager {
+  display: flex;
+  justify-content: space-between;
+  padding: 26px 0;
+  font-size: 15px;
+}
+.pager__disabled { color: var(--mute); }

@@ -22,7 +22,7 @@ Note: Avoid second-person fictional scenarios ("Imagine this...", "You have just
 
 ## Terminal Prompt Style
 
-The blog uses a terminal-themed aesthetic. Posts that use this pattern open and close with PowerShell-style prompts.
+The blog uses a terminal-themed aesthetic. Posts that use this pattern open with a PowerShell-style prompt.
 
 **Opening prompt** (appears immediately after front matter):
 
@@ -36,13 +36,7 @@ Real example:
 <span class="prompt">PS C:\DevProjects\DevBlog&gt;</span> Get-Content .\Thoughts\GamingMindset.md
 ```
 
-**Closing prompt** -- a thematic PowerShell command as a sign-off:
-
-```html
-<span class="prompt">PS C:\DevProjects\DevBlog&gt;</span> Start-Process -FilePath .\Career\LevelUp.exe -Verb RunAs
-```
-
-Note: Not all posts use terminal prompts. The "Start With Why" and "Zen for AL" posts omit them. When used, the closing command should be playful and relevant to the post's theme.
+Note: Not all posts use terminal prompts. The "Start With Why" and "Zen for AL" posts omit them.
 
 ## Tone Markers
 

@@ -1,7 +1,7 @@
 # Jekyll Blog - AI Coding Agent Instructions
 
 ## Project Overview
-This is a Jekyll-based blog focused on Business Central AL development, AI, and consulting topics. The site uses a custom **terminal/PowerShell theme** with GitHub Pages hosting.
+This is a Jekyll-based blog focused on Business Central AL development, AI, and consulting topics. The site uses a light/dark design-token theme with GitHub Pages hosting.
 
 **Key URLs:**
 - Local dev: `http://127.0.0.1:4000/`
@@ -9,17 +9,12 @@ This is a Jekyll-based blog focused on Business Central AL development, AI, and 
 
 ## Architecture & Design Philosophy
 
-### Terminal-Inspired UI Theme
-The entire site mimics a PowerShell terminal aesthetic:
-- Navigation elements styled as PowerShell commands (e.g., `PS C:\ALProjects\BCBlog>`)
-- Code blocks use PowerShell-style prompts
-- Color scheme: dark blue backgrounds (`#012456`), cyan highlights (`#00ffff`), terminal fonts (Cascadia Code)
-- All interactive elements should maintain this PowerShell metaphor
-
-**Example from `_layouts/home.html`:**
-```html
-<span class="prompt">PS C:\ALProjects\BCBlog&gt;</span> Get-ChildItem -Path .\posts\
-```
+### Design Tokens and Signature Line
+The site uses CSS custom-property tokens defined in `_sass/_tokens.scss` (light and dark variants), applied consistently across components:
+- Each page renders exactly one signature command line via `_includes/signature.html` (e.g., `PS C:\DevProjects\DevBlog> Get-Content .\Category\Slug.md`)
+- Code blocks use Rouge syntax highlighting with token-based colors
+- Fonts: Inter (sans) and JetBrains Mono (mono)
+- Legacy posts with an inline `.prompt` opener/closer paragraph have that paragraph hidden via CSS (`_sass/_typography.scss`) since the layout already renders the signature line
 
 ### Layout Hierarchy
 1. `base.html` - Master layout with navigation, footer, analytics, Mermaid.js integration
@@ -30,8 +25,7 @@ The entire site mimics a PowerShell terminal aesthetic:
 ### Content Components
 - `_includes/toc.html` - Auto-generates Table of Contents from h2-h6 headers
 - `_includes/google-analytics.html` - GA4 tracking (G-5FQ1BD5CNH)
-- `_includes/nav.html` - Site navigation
-- `_includes/header.html` - Page headers
+- `_includes/signature.html` - Signature command line (one per page)
 
 ## Blog Post Conventions
 
@@ -128,7 +122,7 @@ Always test these edge cases:
 - **Pagination:** 5 posts per page (`paginate: 5`)
 - **Markdown:** Kramdown with GFM input, Rouge syntax highlighting
 - **Plugins:** jekyll-feed, jekyll-seo-tag, jekyll-paginate, jekyll-sitemap
-- **Social links:** LinkedIn, GitHub, X/Twitter, Bluesky
+- **Social links:** LinkedIn, GitHub, X (footer order); Bluesky remains configured but is not rendered
 - **Google Analytics:** G-5FQ1BD5CNH (production only)
 
 ### `Gemfile`
@@ -162,9 +156,9 @@ Always test these edge cases:
 6. Test locally with `bundle exec jekyll serve --livereload`
 
 ### Modifying the Theme
-1. **Colors/Fonts:** Edit `_sass/terminal-theme.scss`
+1. **Colors/Fonts:** Edit `_sass/_tokens.scss`
 2. **Layout structure:** Modify `_layouts/base.html`
-3. **Navigation:** Update `_includes/nav.html` or nav section in `base.html`
+3. **Navigation:** Update the header block in `_layouts/base.html`
 4. **Post template:** Edit `_layouts/post.html`
 
 ### Adding JavaScript Functionality
