@@ -2,12 +2,21 @@
 <html lang="{{ page.lang | default: site.lang | default: "en" }}">
   <head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script>
+      (function () {
+        var t;
+        try { t = localStorage.getItem('theme'); } catch (e) {}
+        if (t !== 'light' && t !== 'dark') {
+          t = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        }
+        document.documentElement.setAttribute('data-theme', t);
+      })();
+    </script>
     {%- seo -%}
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ "/assets/css/main.css" | relative_url }}">
     <link rel="shortcut icon" type="image/x-icon" href="{{ "/favicon.ico" | relative_url }}">
     {%- feed_meta -%}
@@ -16,102 +25,43 @@
     {%- endif -%}
   </head>
   <body>
-    <div class="tp-root{% if page.layout == 'post' %} pp-root{% endif %}">
-      <!-- Window chrome (Windows Terminal) -->
-      <div class="tp-chrome">
-        <div class="tp-chrome-tabs">
-          <span class="tp-tab tp-tab-active">
-            <span class="tp-tab-icon">›_</span>
-            Windows PowerShell
-            <span class="tp-tab-x">×</span>
-          </span>
-          <span class="tp-tab">
-            <span class="tp-tab-icon">≡</span>
-            blog.ps1
-            <span class="tp-tab-x">×</span>
-          </span>
-          <span class="tp-tab-add">+</span>
-          <span class="tp-tab-add">⌄</span>
-        </div>
-        <div class="tp-chrome-title">fbakkensen@BCDEV: ~\ALProjects\BCBlog</div>
-        <div class="tp-winctrls">
-          <span class="tp-winctrl tp-winctrl-min" title="Minimize">─</span>
-          <span class="tp-winctrl tp-winctrl-max" title="Maximize">▢</span>
-          <span class="tp-winctrl tp-winctrl-close" title="Close">×</span>
-        </div>
-      </div>
-
-      <!-- Top nav -->
-      <header class="tp-nav">
-        <div class="tp-nav-brand">
-          <span class="tp-brand-glyph">›</span>
-          <a href="{{ "/" | relative_url }}" class="tp-brand-text">BC Development</a>
-          <span class="tp-brand-suffix">.ps1</span>
-        </div>
-        <button class="hamburger-menu" aria-label="Toggle navigation menu" aria-expanded="false">
-          <span class="hamburger-line"></span>
-          <span class="hamburger-line"></span>
-          <span class="hamburger-line"></span>
-        </button>
-        <nav class="tp-nav-links terminal-nav">
-          <a href="{{ "/" | relative_url }}" class="tp-nav-link nav-link"><span class="tp-nav-prompt">PS&gt;</span>Blog</a>
-          <a href="{{ "/tags/" | relative_url }}" class="tp-nav-link nav-link"><span class="tp-nav-prompt">PS&gt;</span>Tags</a>
-          <a href="{{ "/about" | relative_url }}" class="tp-nav-link nav-link"><span class="tp-nav-prompt">PS&gt;</span>About</a>
-          <a href="{{ site.linkedin_url }}" class="tp-nav-cta nav-link" target="_blank" rel="noopener noreferrer">
-            <span class="tp-nav-prompt tp-cta-prompt">PS&gt;</span>Connect
-          </a>
+    <header class="site-header">
+      <div class="site-header__inner">
+        <a href="{{ "/" | relative_url }}" class="site-brand">
+          <span class="site-brand__glyph">›</span>
+          <span class="site-brand__name">{{ site.author.name }}</span>
+        </a>
+        <nav class="site-nav" aria-label="Main">
+          <a href="{{ "/" | relative_url }}" class="site-nav__link"{% if page.layout == 'home' %} aria-current="page"{% endif %}>Blog</a>
+          <a href="{{ "/tags/" | relative_url }}" class="site-nav__link"{% if page.url == '/tags/' %} aria-current="page"{% endif %}>Tags</a>
+          <a href="{{ "/about" | relative_url }}" class="site-nav__link"{% if page.url == '/about.html' or page.url == '/about/' %} aria-current="page"{% endif %}>About</a>
         </nav>
-      </header>
-
-      <main>{{ content }}</main>
-
-      <!-- Footer -->
-      <footer class="tp-foot">
-        <div class="tp-foot-line">
-          <span class="tp-cmd-path">PS C:\&gt;</span>
-          <span class="tp-cmd-verb">Write-Host</span>
-          <span class="tp-cmd-string">"© {{ 'now' | date: '%Y' }} {{ site.author.name | default: site.title }} — Business Central Developer"</span>
-          <span class="tp-cmd-flag">-ForegroundColor</span>
-          <span class="tp-cmd-flag">Magenta</span>
-        </div>
-        <div class="tp-foot-links">
-          <a href="{{ site.linkedin_url }}" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-          <span class="tp-foot-sep">·</span>
-          <a href="{{ site.github_url }}" target="_blank" rel="noopener noreferrer">GitHub</a>
-          <span class="tp-foot-sep">·</span>
-          <a href="{{ site.twitter_url }}" target="_blank" rel="noopener noreferrer">X</a>
-          <span class="tp-foot-sep">·</span>
-          <a href="{{ site.bluesky_url }}" target="_blank" rel="noopener noreferrer">Bluesky</a>
-        </div>
-      </footer>
-    </div>
-    <script src="{{ "/assets/js/mobile-nav.js" | relative_url }}?v={{ site.time | date: '%s' }}"></script>
+        <button id="theme-toggle" class="theme-toggle" type="button" aria-label="Switch theme"></button>
+      </div>
+      {%- if page.layout == 'post' -%}
+      <div class="reading-progress" id="reading-progress" aria-hidden="true"></div>
+      {%- endif -%}
+    </header>
+    <main>{{ content }}</main>
+    <footer class="site-footer">
+      <div>© {{ 'now' | date: '%Y' }} {{ site.author.name }}</div>
+      <div class="site-footer__links">
+        <a href="{{ site.linkedin_url }}" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+        <a href="{{ site.github_url }}" target="_blank" rel="noopener noreferrer">GitHub</a>
+        <a href="{{ site.twitter_url }}" target="_blank" rel="noopener noreferrer">X</a>
+        <a href="{{ "/feed.xml" | relative_url }}">RSS</a>
+      </div>
+    </footer>
+    <script src="{{ "/assets/js/theme.js" | relative_url }}?v={{ site.time | date: '%s' }}"></script>
     <script defer src="{{ "/assets/js/code-blocks.js" | relative_url }}?v={{ site.time | date: '%s' }}"></script>
+    {%- if page.layout == 'post' -%}
+    <script defer src="{{ "/assets/js/toc.js" | relative_url }}?v={{ site.time | date: '%s' }}"></script>
+    {%- endif -%}
     <script defer src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js" onload="initMermaid()"></script>
     <script>
       function initMermaid() {
-        mermaid.initialize({
-          startOnLoad: true,
-          theme: 'base',
-          themeVariables: {
-            background: 'transparent',
-            primaryColor: '#11161D',
-            primaryBorderColor: '#22272E',
-            primaryTextColor: '#E6EDF3',
-            lineColor: '#7D8590',
-            textColor: '#E6EDF3',
-            secondaryColor: '#161B22',
-            tertiaryColor: '#11161D',
-            nodeTextColor: '#E6EDF3',
-            mainBkg: '#11161D',
-            actorBkg: '#11161D',
-            actorBorder: '#22272E',
-            actorTextColor: '#E6EDF3',
-            labelBoxBkgColor: '#161B22',
-            labelBoxBorderColor: '#22272E',
-            fontFamily: 'JetBrains Mono, Cascadia Code, Consolas, monospace'
-          }
-        });
+        var theme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'light';
+        mermaid.initialize({ startOnLoad: true, theme: 'base', themeVariables: window.mermaidThemeVariables(theme) });
       }
     </script>
   </body>

@@ -43,7 +43,38 @@ class BuildSmokeTests(SiteTestCase):
 
 
 class BaseLayoutTests(SiteTestCase):
-    pass
+    def test_theme_bootstrap_runs_before_stylesheet(self):
+        html = self.read(HOME)
+        boot = html.index("localStorage.getItem('theme')")
+        css = html.index('href="/assets/css/main.css"')
+        self.assertLess(boot, css)
+
+    def test_header_has_three_nav_links_and_toggle(self):
+        html = self.read(HOME)
+        header = re.search(r'<header class="site-header".*?</header>', html, re.S).group(0)
+        self.assertEqual(re.findall(r'class="site-nav__link[^"]*"[^>]*>([^<]+)<', header), ["Blog", "Tags", "About"])
+        self.assertIn('id="theme-toggle"', header)
+        self.assertNotIn("hamburger", header)
+
+    def test_no_window_chrome_or_prompt_nav(self):
+        html = self.read(HOME)
+        self.assertNotIn("tp-chrome", html)
+        self.assertNotIn("tp-nav-prompt", html)
+
+    def test_footer_links(self):
+        html = self.read(HOME)
+        footer = re.search(r'<footer class="site-footer".*?</footer>', html, re.S).group(0)
+        self.assertEqual(re.findall(r">([A-Za-z]+)</a>", footer), ["LinkedIn", "GitHub", "X", "RSS"])
+        self.assertNotIn("bsky", footer)
+
+    def test_scripts(self):
+        html = self.read(HOME)
+        self.assertIn("/assets/js/theme.js", html)
+        self.assertNotIn("mobile-nav.js", html)
+
+    def test_reading_progress_only_on_posts(self):
+        self.assertNotIn('id="reading-progress"', self.read(HOME))
+        self.assertIn('id="reading-progress"', self.read(POST))
 
 
 class HomeTests(SiteTestCase):

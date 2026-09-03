@@ -1,0 +1,78 @@
+*, *::before, *::after { box-sizing: border-box; }
+
+html {
+  -webkit-text-size-adjust: 100%;
+  scroll-padding-top: calc(var(--header-h) + 16px);
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-sans);
+  font-size: 17px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+@media (min-width: 768px) {
+  body { font-size: 18px; }
+}
+
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+img, svg { max-width: 100%; height: auto; }
+
+.wrap {
+  max-width: var(--measure);
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.mono { font-family: var(--font-mono); }
+
+/* Signature command line: exactly one per page */
+.sig {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--mute);
+  margin: 0 0 14px;
+  white-space: nowrap;
+  overflow-x: auto;
+  scrollbar-width: none;
+  -webkit-mask-image: linear-gradient(90deg, #000 calc(100% - 32px), transparent);
+  mask-image: linear-gradient(90deg, #000 calc(100% - 32px), transparent);
+}
+.sig::-webkit-scrollbar { display: none; }
+.sig__path { color: var(--path); }
+.sig__verb { color: var(--accent); }
+.sig__str { color: var(--string); }
+
+/* Tag pill */
+.tag {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  line-height: 1.6;
+  color: var(--accent);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 1px 9px;
+  margin: 0 6px 6px 0;
+  white-space: nowrap;
+}
+.tag:hover { text-decoration: none; border-color: var(--accent); }
+
+/* Mono meta line: date · read time · tags */
+.meta {
+  font-family: var(--font-mono);
+  font-size: 12.5px;
+  color: var(--mute);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 12px;
+}
