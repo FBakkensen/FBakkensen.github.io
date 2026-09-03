@@ -777,8 +777,12 @@ Renders the single signature command line for a page.
 <p class="sig"><span class="sig__path">PS C:\Blog&gt;</span> <span class="sig__verb">Get-ChildItem</span> .\posts\ | <span class="sig__verb">Sort-Object</span> Date -Descending</p>
 {%- elsif include.kind == "post" -%}
 {%- assign category = include.post.categories | first | default: "Posts" | replace: " ", "" -%}
-{%- assign words = include.post.signature_file | default: include.post.title | truncatewords: 4, "" | split: " " -%}
+{%- if include.post.signature_file -%}
+{%- assign file = include.post.signature_file -%}
+{%- else -%}
+{%- assign words = include.post.title | truncatewords: 4, "" | split: " " -%}
 {%- capture file -%}{%- for w in words -%}{{ w | remove: ":" | remove: "," | remove: "'" | remove: "’" | remove: '"' | remove: "?" | remove: "!" | remove: "(" | remove: ")" | remove: "." | remove: "/" | remove: "-" }}{%- endfor -%}{%- endcapture -%}
+{%- endif -%}
 <p class="sig"><span class="sig__path">PS C:\DevProjects\DevBlog&gt;</span> <span class="sig__verb">Get-Content</span> <span class="sig__str">.\{{ category }}\{{ file }}.md</span></p>
 {%- endif -%}
 ```
