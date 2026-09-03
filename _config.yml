@@ -31,7 +31,6 @@ google_analytics: G-5FQ1BD5CNH # Google Analytics tracking ID
 exclude:
   - scripts/
   - docs/
-  - design-prototypes/
   - Gemfile
   - Gemfile.lock
   - vendor/
