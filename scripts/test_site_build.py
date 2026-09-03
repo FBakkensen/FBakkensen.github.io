@@ -78,7 +78,40 @@ class BaseLayoutTests(SiteTestCase):
 
 
 class HomeTests(SiteTestCase):
-    pass
+    def test_exactly_one_signature_line(self):
+        html = self.read(HOME)
+        self.assertEqual(self.count(r'<p class="sig">', html), 1)
+        self.assertIn("Get-ChildItem", html)
+        self.assertIn("Sort-Object", html)
+
+    def test_intro_uses_site_description(self):
+        html = self.read(HOME)
+        self.assertIn("Business Central development, agentic tooling, and what actually works.", html)
+
+    def test_five_posts_with_meta_title_description_tags(self):
+        html = self.read(HOME)
+        items = re.findall(r'<article class="post-list__item">.*?</article>', html, re.S)
+        self.assertEqual(len(items), 5)
+        first = items[0]
+        self.assertIn('class="meta"', first)
+        self.assertRegex(first, r"\d{4}-\d{2}-\d{2}")
+        self.assertRegex(first, r"~\d+ min")
+        self.assertIn('class="post-list__title"', first)
+        self.assertIn('class="post-list__desc"', first)
+        self.assertLessEqual(self.count(r'class="tag"', first), 3)
+
+    def test_no_sidebar_or_command_links(self):
+        html = self.read(HOME)
+        self.assertNotIn("tp-side", html)
+        self.assertNotIn("whoami", html)
+        self.assertNotIn("Read-Post", html)
+        self.assertNotIn("Find-Post", html)
+
+    def test_pager_links(self):
+        html = self.read(HOME)
+        self.assertIn('class="pager"', html)
+        self.assertIn("Older", html)
+        self.assertIn('href="/page2/"', html)
 
 
 class PostTests(SiteTestCase):
