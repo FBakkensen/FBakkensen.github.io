@@ -15,6 +15,8 @@ bundle exec jekyll serve --livereload --future
 ```
 
 ### Testing
+Build checks: bundle exec jekyll build --quiet && python -m unittest scripts.test_site_build -v
+
 No unit test framework. Use Playwright MCP for browser testing:
 - Navigate with `mcp_playwright_browser_navigate`
 - Check console errors with `mcp_playwright_browser_console_messages`
@@ -31,23 +33,24 @@ Test these scenarios:
 
 ## Project Architecture
 
-### Theme: Terminal/PowerShell UI
-- Dark blue backgrounds (#012456), cyan highlights (#00ffff)
-- Navigation styled as PowerShell commands (e.g., `PS C:\ALProjects\BCBlog>`)
-- Font: Cascadia Code for code, system-ui for body text
-- All interactive elements maintain PowerShell metaphor
+### Theme: Reading-first, light and dark
+- CSS custom properties in `_sass/_tokens.scss` (light on `:root`, dark on `html[data-theme="dark"]`): bg, surface, text, mute, border, accent, path, string, code-*.
+- Inter for body text (17px, 18px from 768px, line-height 1.65); JetBrains Mono for code, meta, tags, and the signature line.
+- Reading column max-width 42rem (`.wrap`). Posts add a sticky table-of-contents rail from 1100px.
+- Theme toggle in the header, persisted in `localStorage.theme`, default from `prefers-color-scheme`.
+- Exactly one signature PowerShell line per page, rendered by `_includes/signature.html`. No other command-styled UI: nav, links, buttons and footer are plain text.
 
 ### Layout Hierarchy
-- `base.html` - Master layout (nav, footer, analytics, Mermaid.js)
-- `home.html` - Blog listing with sidebar
-- `post.html` - Individual post with TOC
-- `page.html` - Static pages
+- `base.html` - head with theme bootstrap, sticky header (brand, Blog · Tags · About, theme toggle), reading-progress bar on posts, footer (LinkedIn, GitHub, X, RSS), scripts, Mermaid
+- `home.html` - intro with signature line, paginated post list, pager
+- `post.html` - signature line, title, deck, meta, author, TOC (rail on desktop, `<details>` below 1100px), body, share links, previous/next
+- `page.html` - title, optional description, body (About, Tags)
 
 ### File Structure
 - `_posts/`: Blog posts (YYYY-MM-DD-title.md)
 - `_layouts/`: Jekyll templates
 - `_includes/`: Reusable components (toc.html, nav.html, header.html, google-analytics.html)
-- `_sass/terminal-theme.scss`: Theme styles
+- `_sass/`: one partial per component, see SCSS Styles
 - `assets/css/main.scss`: Compiled CSS
 - `assets/js/`: JavaScript functionality
 - `assets/images/YYYY-MM-DD-post-slug/`: Post images
@@ -61,10 +64,10 @@ Test these scenarios:
 - Reference assets with `| relative_url` filter
 
 ### SCSS Styles
-- Use theme variables from `terminal-theme.scss` (ps-bg, ps-cyan, ps-yellow, ps-green, ps-red, ps-magenta)
-- BEM-like naming convention
-- Mobile-first responsive design with breakpoints at 768px
-- Code font mixin: `@include code-font`
+- One partial per component in `_sass/`: `_tokens`, `_base`, `_typography`, `_header`, `_footer`, `_post-list`, `_post`, `_toc`, `_code`, `_tags`; `assets/css/main.scss` only imports
+- Colours and fonts only via the custom properties from `_tokens.scss`; never hardcode a hex value in a component partial
+- BEM-like naming (`block__element--modifier`), state classes `is-current`, `is-active`
+- Mobile first; breakpoints 600px, 768px, 1100px
 
 ### JavaScript
 - ES6+ syntax with proper event listeners
@@ -112,7 +115,7 @@ tags: [tag1, tag2]
 - Plugins: jekyll-feed, jekyll-seo-tag, jekyll-paginate, jekyll-sitemap
 - Markdown: Kramdown with Rouge syntax highlighting
 - Google Analytics: G-5FQ1BD5CNH (production only)
-- Social links: LinkedIn, GitHub, X/Twitter, Bluesky
+- Social links: LinkedIn, GitHub, X/Twitter
 
 ### Tags System
 - Tags defined in post front matter: `tags: [tag1, tag2]`
@@ -130,9 +133,9 @@ tags: [tag1, tag2]
 6. Test locally with `bundle exec jekyll serve --livereload`
 
 ### Modifying the Theme
-1. Colors/Fonts: Edit `_sass/terminal-theme.scss`
+1. Colors/Fonts: Edit `_sass/_tokens.scss`
 2. Layout structure: Modify `_layouts/base.html`
-3. Navigation: Update `_includes/nav.html`
+3. Navigation: Update the header block in `_layouts/base.html`
 4. Post template: Edit `_layouts/post.html`
 
 ### Build Process

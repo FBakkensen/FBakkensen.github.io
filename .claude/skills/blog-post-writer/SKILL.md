@@ -157,7 +157,7 @@ tags: [tag1, tag2, tag3, tag4, tag5]
 
 ---
 
-*What are your thoughts on [topic]? I'd love to hear your experiences — connect with me on [LinkedIn](https://www.linkedin.com/in/flemmingbakkensen/) or [Bluesky](https://bsky.app/profile/fbakkensen.bsky.social).*
+*What are your thoughts on [topic]? I'd love to hear your experiences — connect with me on [LinkedIn](https://www.linkedin.com/in/flemmingbakkensen/) or [X](https://x.com/fbakkensen).*
 ```
 
 ### Front Matter Rules
@@ -264,4 +264,4 @@ Run this checklist after drafting. Present results as a pass/fail table.
 | No clickbait | No false urgency, no superlatives, no hype |
 | Skip test | Narrative coherent without visuals |
 | SEO checklist | All items pass from `references/seo-checklist.md` |
-| Social CTA | Closing with LinkedIn and Bluesky links |
+| Social CTA | Closing with LinkedIn and X links |

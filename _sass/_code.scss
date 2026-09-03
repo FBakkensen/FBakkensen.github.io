@@ -40,6 +40,8 @@ code {
 .highlight .nt { color: var(--code-type); }
 .highlight .err { color: var(--code-keyword); }
 .highlight .gh, .highlight .gu { color: var(--code-number); font-weight: bold; }
+.highlight .gd { color: var(--code-keyword); background: color-mix(in srgb, var(--code-keyword) 12%, transparent); }
+.highlight .gi { color: var(--code-type); background: color-mix(in srgb, var(--code-type) 12%, transparent); }
 
 /* Classes produced by assets/js/code-blocks.js */
 .code-block-wrapper {

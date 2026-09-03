@@ -177,7 +177,21 @@ class PageTests(SiteTestCase):
 
 
 class CleanupTests(SiteTestCase):
-    pass
+    def test_old_theme_classes_absent_from_css(self):
+        css = (self.site / "assets/css/main.css").read_text(encoding="utf-8")
+        for needle in [".tp-root", ".tp-chrome", ".pp-article", "--tp-bg"]:
+            self.assertNotIn(needle, css)
+
+    def test_dead_files_not_built(self):
+        self.assertFalse((self.site / "assets/js/mobile-nav.js").exists())
+        self.assertFalse((self.site / "Screenshot.png").exists())
+        self.assertFalse((self.site / "docs").exists())
+
+    def test_no_old_classes_in_pages(self):
+        for rel in [HOME, TAGS, ABOUT]:
+            html = self.read(rel)
+            self.assertNotRegex(html, r'class="(tp|pp)-')
+        self.assertNotRegex(self.read(POST), r'class="(tp|pp)-')
 
 
 if __name__ == "__main__":
