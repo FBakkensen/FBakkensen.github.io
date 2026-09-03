@@ -148,10 +148,12 @@ class PostTests(SiteTestCase):
         for needle in ["pp-breadcrumb", "Read-Progress", "Share-Post", "Get-AuthorPosts", "Get-NextPost", "tp-pane"]:
             self.assertNotIn(needle, html)
 
-    def test_legacy_prompt_post_keeps_body_prompt_span(self):
+    def test_legacy_prompt_post_hides_opener_and_closer(self):
         html = self.read_glob(LEGACY_PROMPT_POST_GLOB)
         self.assertEqual(self.count(r'<p class="sig">', html), 1)
-        self.assertIn('<span class="prompt">', html)
+        css = (SITE / "assets" / "css" / "main.css").read_text(encoding="utf-8")
+        self.assertRegex(css, r"\.post-body\s*>\s*p:has\(\s*>\s*\.prompt\s*\)")
+        self.assertNotIn("p:first-child:has", css)
 
     def test_toc_script_only_on_posts(self):
         self.assertIn("/assets/js/toc.js", self.read(POST))

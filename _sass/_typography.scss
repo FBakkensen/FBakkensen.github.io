@@ -51,5 +51,5 @@ h1, h2, h3, h4 {
 .post-body th, .post-body td { border: 1px solid var(--border); padding: 8px 12px; text-align: left; vertical-align: top; }
 .post-body th { background: var(--surface); }
 
-/* Legacy opener used by six posts: the layout already renders the signature line */
-.post-body > p:first-child:has(> .prompt) { display: none; }
+/* Legacy opener and closer used by five posts: the layout already renders the signature line */
+.post-body > p:has(> .prompt) { display: none; }

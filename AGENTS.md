@@ -49,7 +49,7 @@ Test these scenarios:
 ### File Structure
 - `_posts/`: Blog posts (YYYY-MM-DD-title.md)
 - `_layouts/`: Jekyll templates
-- `_includes/`: Reusable components (toc.html, nav.html, header.html, google-analytics.html)
+- `_includes/`: Reusable components (signature.html, toc.html, google-analytics.html)
 - `_sass/`: one partial per component, see SCSS Styles
 - `assets/css/main.scss`: Compiled CSS
 - `assets/js/`: JavaScript functionality

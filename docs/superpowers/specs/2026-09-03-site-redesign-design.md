@@ -71,11 +71,9 @@ mask instead of a visible scrollbar.
   and the file name is the post title with non-alphanumerics removed.
 - About and Tags: none.
 
-Six existing posts begin with `<span class="prompt">PS C:\...</span> Get-Content ...`.
-The theme hides the paragraph that contains `.prompt` when it is the first child of
-the post body (`.post-body > p:first-child:has(> .prompt)`), so those posts show one
-signature line. The `blog-post-writer` skill template keeps the opener because the
-layout renders it correctly either way.
+Five existing posts begin with `<span class="prompt">PS C:\...</span> Get-Content ...`
+and each also ends with a closing prompt paragraph, both hidden by CSS
+(`.post-body > p:has(> .prompt)`) so those posts show one signature line.
 
 ### Mermaid
 
