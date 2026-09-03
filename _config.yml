@@ -30,6 +30,7 @@ google_analytics: G-5FQ1BD5CNH # Google Analytics tracking ID
 # defaults, so the defaults are restated here)
 exclude:
   - scripts/
+  - docs/
   - design-prototypes/
   - Gemfile
   - Gemfile.lock
