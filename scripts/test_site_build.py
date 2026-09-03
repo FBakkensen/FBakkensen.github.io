@@ -84,9 +84,12 @@ class HomeTests(SiteTestCase):
         self.assertIn("Get-ChildItem", html)
         self.assertIn("Sort-Object", html)
 
-    def test_intro_uses_site_description(self):
+    def test_intro_is_signature_line_only(self):
         html = self.read(HOME)
-        self.assertIn("Business Central development, agentic tooling, and what actually works.", html)
+        intro = re.search(r'<section class="home-intro">(.*?)</section>', html, re.S).group(1)
+        self.assertEqual(self.count(r'<p class="sig">', intro), 1)
+        self.assertNotIn("<h1", intro)
+        self.assertNotIn("home-intro__sub", intro)
 
     def test_five_posts_with_meta_title_description_tags(self):
         html = self.read(HOME)
